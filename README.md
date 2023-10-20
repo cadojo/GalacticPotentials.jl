@@ -18,3 +18,12 @@ Pkg.add("https://github.com/cadojo/GalacticPotentials.jl")  # in Julia code
 ```julia
 pkg> add https://github.com/cadojo/GalacticPotentials.jl    # in Julia's REPL
 ```
+
+## Credits
+
+I am [bootstrapping](/gen/gala.jl) this package off of [`gala`](http://gala.adrian.pw)
+and [`galpy`](https://docs.galpy.org), two rich Python packages for galactic dynamics. 
+I aim to learn about galactic dynamics by integrating the models within these two popular
+Python packages into the [SciML](https://sciml.ai) ecosystem.
+
+Thank you the developers of `gala` and `galpy`!
