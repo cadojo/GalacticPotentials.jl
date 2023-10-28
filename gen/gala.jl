@@ -21,7 +21,7 @@ expressions = Dict{String,LaTeXString}()
 
 latex!(collection::AbstractDict, name::AbstractString) =
     try
-        collection[name] = sympy.latex(getproperty(gala.potential, name).to_sympy())
+        collection[name] = getproperty(gala.potential, name).to_latex()
     catch
         @warn "Unable to get expression for $name."
     end
