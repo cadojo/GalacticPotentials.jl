@@ -24,6 +24,10 @@ pkg> add https://github.com/cadojo/GalacticPotentials.jl    # in Julia's REPL
 I am [bootstrapping](/gen/gala.jl) this package off of [`gala`](http://gala.adrian.pw)
 and [`galpy`](https://docs.galpy.org), two rich Python packages for galactic dynamics. 
 I aim to learn about galactic dynamics by integrating the models within these two popular
-Python packages into the [SciML](https://sciml.ai) ecosystem.
+Python packages into the [SciML](https://sciml.ai) ecosystem. 
 
-Thank you the developers of `gala` and `galpy`!
+
+The scalar field symbolic-numerics are copied and modified versions of `AbstractSystem`
+interfaces within [`ModelingToolkit.jl`](https://github.com/sciml/ModelingToolkit.jl).
+The field implementations in this package are highly unstable; they will change in the 
+near future.
