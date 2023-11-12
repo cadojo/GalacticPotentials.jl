@@ -270,12 +270,10 @@ function ModelingToolkit.generate_hessian(sys::AbstractScalarField, vs=states(sy
 end
 
 function ModelingToolkit.generate_function(sys::AbstractScalarField, dvs=states(sys), ps=parameters(sys);
-    kwargs...)
-    vs = sys.value
-    pre, sol_states = ModelingToolkit.get_substitutions_and_solved_states(sys)
+    simplify=false, kwargs...)
+    vs = simplify ? ModelingToolkit.simplify(sys.value) : sys.value
 
-    return Symbolics.build_function([vs], ModelingToolkit.value.(dvs), ModelingToolkit.value.(ps); postprocess_fbody=pre,
-        states=sol_states, kwargs...)
+    return Symbolics.build_function(vs, ModelingToolkit.value.(dvs), ModelingToolkit.value.(ps); kwargs...)
 end
 
 function ModelingToolkit.jacobian_sparsity(sys::AbstractScalarField)

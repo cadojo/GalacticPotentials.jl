@@ -1,4 +1,4 @@
-[![Tests](https://github.com/cadojo/GalacticPotentials.jl/workflows/UnitTests/badge.svg)](https://github.com/cadojo/GalacticPotentials.jl/actions?query=workflow%3AUnitTests)
+[![Tests](https://github.com/cadojo/GalacticPotentials.jl/workflows/Tests/badge.svg)](https://github.com/cadojo/GalacticPotentials.jl/actions?query=workflow%3ATests)
 [![Docs](https://github.com/cadojo/GalacticPotentials.jl/workflows/Documentation/badge.svg)](https://cadojo.github.io/GalacticPotentials.jl)
 
 # GalacticPotentials.jl
