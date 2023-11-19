@@ -77,7 +77,7 @@ Base.@kwdef struct ScalarField <: AbstractScalarField
     structurally identical.
     """
     tag::UInt
-    """Vector of equations defining the system."""
+    """Scalar value defining the field."""
     value::Num
     """Independent variables."""
     iv::SymbolicUtils.BasicSymbolic{Real}
@@ -151,9 +151,13 @@ Base.@kwdef struct ScalarField <: AbstractScalarField
     end
 end
 
+get_value(sys::ScalarField) = sys.value
+get_values(sys::ScalarField) = [get_value(sys.value)]
+ModelingToolkit.get_eqs(::ScalarField) = ModelingToolkit.Equation[]
+
 function ScalarField(
     value, iv, states, ps;
-    observed=[],
+    observed=Num[],
     name=nothing,
     defaults=Dict(),
     systems=ScalarField[],
@@ -201,14 +205,14 @@ function ScalarField(
 end
 
 
-function ModelingToolkit.calculate_tgrad(sys::AbstractScalarField;
+function ModelingToolkit.calculate_tgrad(sys::AbstractField;
     simplify=false)
     isempty(ModelingToolkit.get_tgrad(sys)[]) || return ModelingToolkit.get_tgrad(sys)[]  # use cached tgrad, if possible
 
     # We need to remove explicit time dependence on the state because when we
     # have `u(t) * t` we want to have the tgrad to be `u(t)` instead of `u'(t) *
     # t + u(t)`.
-    vs = ModelingToolkit.detime_dvs.(sys.value)
+    vs = ModelingToolkit.detime_dvs.(get_value(sys))
     iv = ModelingToolkit.get_iv(sys)
     xs = states(sys)
     rule = Dict(map((x, xt) -> xt => x, ModelingToolkit.detime_dvs.(xs), xs))
@@ -220,7 +224,7 @@ function ModelingToolkit.calculate_tgrad(sys::AbstractScalarField;
     return tgrad
 end
 
-function ModelingToolkit.calculate_jacobian(sys::AbstractScalarField; simplify=false, dvs=states(sys))
+function ModelingToolkit.calculate_jacobian(sys::AbstractField; simplify=false, dvs=states(sys))
     if isequal(dvs, states(sys))
         cache = ModelingToolkit.get_jac(sys)[]
         if cache isa Tuple && cache[2] == simplify
@@ -228,7 +232,7 @@ function ModelingToolkit.calculate_jacobian(sys::AbstractScalarField; simplify=f
         end
     end
 
-    vs = sys.value
+    vs = get_value(sys)
 
     jac = ModelingToolkit.gradient(vs, dvs, simplify=simplify)
 
@@ -239,59 +243,54 @@ function ModelingToolkit.calculate_jacobian(sys::AbstractScalarField; simplify=f
     return jac
 end
 
-function ModelingToolkit.generate_jacobian(sys::AbstractScalarField, vs=states(sys), ps=parameters(sys);
-    simplify=false, kwargs...)
+ModelingToolkit.calculate_gradient(sys::AbstractField; simplify=false, dvs=states(sys)) = ModelingToolkit.calculate_jacobian(sys; simplify=simplify, dvs=dvs)
+
+
+function ModelingToolkit.generate_jacobian(sys::AbstractField, vs=states(sys), ps=parameters(sys); simplify=false, kwargs...)
     jac = ModelingToolkit.calculate_jacobian(sys, simplify=simplify)
     pre = ModelingToolkit.get_preprocess_constants(jac)
     return Symbolics.build_function(jac, vs, ps; postprocess_fbody=pre, kwargs...)
 end
 
 
-function ModelingToolkit.calculate_hessian(sys::AbstractScalarField; sparse=false, simplify=false, dvs=states(sys))
-    if isequal(dvs, states(sys))
-        cache = ModelingToolkit.get_jac(sys)[]
-        if cache isa Tuple && cache[2] == simplify
-            return cache[1]
-        end
-    end
+ModelingToolkit.generate_gradient(sys::AbstractField, vs=states(sys), ps=parameters(sys); simplify=false, kwargs...) = ModelingToolkit.generate_jacobian(sys, vs, ps; simplify=simplify, kwargs...)
+
+function ModelingToolkit.calculate_hessian(sys::AbstractScalarField; simplify=false, dvs=states(sys))
 
     vs = ModelingToolkit.calculate_jacobian(sys)
-    hess = ModelingToolkit.jacobian(vs, dvs, simplify=simplify)
+    hess = ModelingToolkit.jacobian(vs, dvs; simplify=simplify)
 
     return hess
 end
 
-
-function ModelingToolkit.generate_hessian(sys::AbstractScalarField, vs=states(sys), ps=parameters(sys);
-    sparse=false, simplify=false, kwargs...)
-    hess = ModelingToolkit.calculate_hessian(sys, sparse=sparse, simplify=simplify)
+function ModelingToolkit.generate_hessian(sys::AbstractScalarField, vs=states(sys), ps=parameters(sys); simplify=false, kwargs...)
+    hess = ModelingToolkit.calculate_hessian(sys, simplify=simplify)
     pre = ModelingToolkit.get_preprocess_constants(hess)
     return Symbolics.build_function(hess, vs, ps; postprocess_fbody=pre, kwargs...)
 end
 
-function ModelingToolkit.generate_function(sys::AbstractScalarField, dvs=states(sys), ps=parameters(sys);
-    simplify=false, kwargs...)
-    vs = simplify ? ModelingToolkit.simplify(sys.value) : sys.value
+function ModelingToolkit.generate_function(sys::AbstractField, dvs=states(sys), ps=parameters(sys); simplify=false, kwargs...)
+    vs = simplify ? ModelingToolkit.simplify(get_value(sys)) : get_value(sys)
 
     return Symbolics.build_function(vs, ModelingToolkit.value.(dvs), ModelingToolkit.value.(ps); kwargs...)
 end
 
-function ModelingToolkit.jacobian_sparsity(sys::AbstractScalarField)
-    ModelingToolkit.jacobian_sparsity([sys.value],
+function ModelingToolkit.jacobian_sparsity(sys::AbstractField)
+    ModelingToolkit.jacobian_sparsity([get_value(sys)],
         states(sys))
 end
 
 function ModelingToolkit.hessian_sparsity(sys::AbstractScalarField)
-    [ModelingToolkit.hessian_sparsity([sys.value],
+    [ModelingToolkit.hessian_sparsity([get_value(sys)],
         states(sys)) for eq in equations(sys)] # TODO: this does not look right
 end
 
 function Base.show(io::IO, mime::MIME"text/plain", sys::AbstractField)
-    val = sys.value
+    val = get_value(sys)
     vars = states(sys)
     nvars = length(vars)
-    if val isa AbstractArray && eltype(eqs) <: Num
-        nvs = count(v -> !(v isa Connection), eqs)
+    if val isa AbstractArray && eltype(val) <: Num
+        nvs = count(v -> !(v isa Connection), val)
         Base.printstyled(io, "Model $(nameof(sys)) with $nvs"; bold=true)
         # nextras = n_extra_equations(sys)
         # if nextras > 0

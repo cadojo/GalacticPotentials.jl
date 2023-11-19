@@ -7,16 +7,27 @@ using ModelingToolkit, Symbolics
 
 import GalacticPotentials: ScalarSystem
 
-@testset "ScalarField Construction" begin
+@testset "Scalar Fields" begin
     @variables t
     p = @parameters b
     q = @variables x(t) y(t) z(t)
 
-    @test ScalarField(
+    field = ScalarField(
         (b // 2) * sum(q .^ 2),
         t,
         q,
         p;
         name=:SomeField
-    ) isa ModelingToolkit.AbstractSystem
+    )
+
+    @testset "Constructors" begin
+        @test field isa ModelingToolkit.AbstractSystem
+    end
+
+    @testset "Calculations" begin
+        @test all(calculate_jacobian(field) - calculate_gradient(field) .== 0)
+        @test calculate_hessian(field) isa AbstractMatrix
+    end
+
+
 end
