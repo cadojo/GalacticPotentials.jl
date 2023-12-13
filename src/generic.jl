@@ -96,7 +96,8 @@ Base.@kwdef struct ScalarField <: AbstractScalarField
     tgrad::Base.RefValue{Any}
     """
     Jacobian matrix. Note: this field will not be defined until
-    [`calculate_jacobian`](@ref) is called on the system.
+    [`calculate_jacobian`](@ref) or [`calculate_gradient`](@ref) is called 
+    on the system.
     """
     jac::Base.RefValue{Any}
     """

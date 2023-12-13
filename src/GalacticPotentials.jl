@@ -41,5 +41,6 @@ export
 
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("generic.jl")
+include("potentials.jl")
 
 end # module GalacticPotentials
