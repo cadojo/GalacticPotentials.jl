@@ -142,3 +142,89 @@ function LongMuraliBarPotential(; name=:LongMuraliBarPotential)
 
     return ScalarField(value, t, u, p; name=name)
 end
+
+"""
+The Miyamoto-Nagai potential.
+
+    $(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])
+"""
+function MiyamotoNagaiPotential(; name=:MiyamotoNagaiPotential)
+
+    @variables t
+    u = @variables x(t) y(t) z(t)
+    p = @parameters G m a b
+
+    value = -G * m / sqrt(x^2 + y^2 + (a + sqrt(b^2 + z^2))^2)
+
+    return ScalarField(value, t, u, p; name=name)
+
+end
+
+"""
+The NFW potential.
+
+    $(LATEX_EXPRESSIONS["NFWPotential"])
+"""
+function NFWPotential(; name=:NFWPotential)
+    @variables t
+    u = @variables x(t) y(t) z(t)
+    p = @parameters G m a b c
+
+    value = -G * m * log10(1 + sqrt(z^2 / c^2 + y^2 / b^2 + x^2 / a^2) / r) / sqrt(z^2 / c^2 + y^2 / b^2 + x^2 / a^2)
+
+    return ScalarField(value, t, u, p; name=name)
+end
+
+"""
+The Plummer potential.
+
+    $(LATEX_EXPRESSIONS["PlummerPotential"])
+"""
+function PlummerPotential(; name=:PlummerPotential)
+    @variables t
+    u = @variables x(t) y(t) z(t)
+    p = @parameters G m b
+
+    value = -G * m / sqrt(b^2 + x^2 + y^2 + z^2)
+    return ScalarField(value, t, u, p; name=name)
+end
+
+"""
+The power-law cutoff potential.
+
+    $(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])
+"""
+function PowerLawCutoffPotential(; name=:PowerLawCutoffPotential)
+
+    @variables t
+    u = @variables x(t) y(t) z(t)
+    p = @parameters G m a α γ
+
+    error("Not yet implemented!")
+
+    value = G * α * m * γ * (3 // 2 - α / 2)
+    return ScalarField(value, t, u, p; name=name)
+
+end
+
+"""
+The Satoh potential.
+
+    $(LATEX_EXPRESSIONS["SatohPotential"])
+"""
+function SatohPotential(; name=:SatohPotential)
+
+    error("Not yet implemented!")
+
+end
+
+"""
+The StonePotential potential.
+
+    $(LATEX_EXPRESSIONS["StonePotential"])
+"""
+function StonePotential(; name=:StonePotential)
+
+    error("Not yet implemented!")
+
+end
