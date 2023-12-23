@@ -19,6 +19,7 @@ using LaTeXStrings
 using LinearAlgebra
 using ForwardDiff
 using ModelingToolkit
+using SciMLBase
 
 export
     ScalarField,
@@ -42,5 +43,6 @@ export
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("generic.jl")
 include("potentials.jl")
+include("odes.jl")
 
 end # module GalacticPotentials

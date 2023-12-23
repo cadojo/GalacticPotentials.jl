@@ -200,9 +200,15 @@ function PowerLawCutoffPotential(; name=:PowerLawCutoffPotential)
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a α γ
 
-    error("Not yet implemented!")
+    throw(
+        ErrorException(
+            """
+            PowerLawCutoffPotential is not yet implemented. This potential requires special math functions, namely the gamma and lowergamma functions. These functions are provided by `SpecialFunctions.jl`, but some work is necessary to register these functions with `Symbolics.jl`. If you'd like to help, please submit a PR!
+            """
+        )
+    )
 
-    value = G * α * m * γ * (3 // 2 - α / 2)
+    value = G * α * m * γ * (3 // 2 - α / 2) # TODO: finish this value!
     return ScalarField(value, t, u, p; name=name)
 
 end
