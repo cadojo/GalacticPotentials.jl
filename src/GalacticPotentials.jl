@@ -35,10 +35,13 @@ export
     MiyamotoNagaiPotential,
     NFWPotential,
     PlummerPotential,
-    PowerLawCutoffPotential,
-    SatohPotential,
-    StonePotential,
-    states
+    # PowerLawCutoffPotential,
+    # SatohPotential,
+    # StonePotential,
+    states,
+    parameters,
+    ODESystem,
+    ODEProblem
 
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("generic.jl")

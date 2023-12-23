@@ -1,6 +1,6 @@
 function ModelingToolkit.ODESystem(field::AbstractScalarField)
 
-    t = independent_variable(field)
+    t = ModelingToolkit.get_iv(field)
     u = states(field)
     p = parameters(field)
     Δ = Differential(t)

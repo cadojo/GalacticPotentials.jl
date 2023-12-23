@@ -5,7 +5,7 @@
 using GalacticPotentials, Test
 using ModelingToolkit, Symbolics
 
-import GalacticPotentials: ScalarSystem
+using GalacticPotentials: AbstractField, AbstractScalarField, ScalarField
 
 @testset "Scalar Fields" begin
     @variables t
@@ -29,5 +29,23 @@ import GalacticPotentials: ScalarSystem
         @test calculate_hessian(field) isa AbstractMatrix
     end
 
+end
+
+@testset "Galactic Potentials" begin
+    for name in names(GalacticPotentials)
+        !occursin("Potential", "$name") && continue
+        occursin("Potentials", "$name") && continue
+
+        @eval field = $name()
+
+        @testset "$name" begin
+            N = length(states(field))
+            M = length(parameters(field))
+            @test field isa AbstractField
+            @test calculate_gradient(field) isa AbstractVector
+            @test ODESystem(field) isa ODESystem
+            @test ODEProblem(field, randn(N), (rand(), rand()), randn(M)) isa ODEProblem
+        end
+    end
 
 end

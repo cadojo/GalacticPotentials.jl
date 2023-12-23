@@ -22,7 +22,7 @@ The Henon-Heiles potential.
 
     $(LATEX_EXPRESSIONS["HenonHeilesPotential"])
 """
-function HenonHeilsPotential(; name=:HenonHeilesPotential)
+function HenonHeilesPotential(; name=:HenonHeilesPotential)
 
     @variables t x(t) y(t)
 
@@ -74,7 +74,7 @@ function JaffePotential(; name=:JaffePotential)
                 sqrt(x^2 + y^2 + z^2) / (c + sqrt(x^2 + y^2 + z^2)) / c
             )
 
-    return ScalarField(value, t, [x, y, z], [G, m, c])
+    return ScalarField(value, t, [x, y, z], [G, m, c]; name=name)
 
 end
 
@@ -120,7 +120,7 @@ function LogarithmicPotential(; name=:LogarithmicPotential)
     q = collect(q)
 
     value = (1 // 2) * v^2 * log10(r^2 + z^2 / q[3]^2 + y^2 / q[2]^2 + x^2 / q[1]^2)
-    return ScalarField(t, [x, y, z], vcat(v, r, q); name=name)
+    return ScalarField(value, t, [x, y, z], vcat(v, r, q); name=name)
 end
 
 """
@@ -168,7 +168,7 @@ The NFW potential.
 function NFWPotential(; name=:NFWPotential)
     @variables t
     u = @variables x(t) y(t) z(t)
-    p = @parameters G m a b c
+    p = @parameters G m a b c r
 
     value = -G * m * log10(1 + sqrt(z^2 / c^2 + y^2 / b^2 + x^2 / a^2) / r) / sqrt(z^2 / c^2 + y^2 / b^2 + x^2 / a^2)
 
