@@ -4,15 +4,25 @@ project:
 manuscript:
   article: index.qmd
 
-format:
-  html:
-    comments:
-      hypothesis: true
-  docx: default
-  jats: default
+date: today
+date-format: long
 
-  # (other formats)
-  # pdf: default
+format:
+  html: default
+  pdf: 
+    fontsize: 12pt
+    mainfont: "CMU Serif"
+    documentclass: article
+    classoption: usletter
+    toc: false
+    colorlinks: true
+    urlcolor: "PaleGreen4!75!black"
+    latex-auto-install: false
+    geometry: 
+      - margin=1in
+      - nohead
+      - nomarginpar
+
 
 execute:
   freeze: true

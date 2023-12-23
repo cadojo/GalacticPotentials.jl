@@ -1,12 +1,26 @@
 ---
-title: Paper
+title: "`GalacticPotentials.jl`"
+subtitle: Symbolic Expressions for Galactic Potential Fields
+bibliography: references.bib
+
 authors:
-  - name: Norah Jones
-    affiliation: The University
+  - name: Joseph D Carpinelli
     roles: writing
     corresponding: true
-bibliography: references.bib
+
+abstract: |
+  Galactic dynamics simulations often use scalar potential fields for 
+  numerically integrating point masses within larger gravitational fields. The 
+  gradient of the scalar field provides the equations of motion for a point 
+  mass within the field. This paper introduces a new package to the Julia 
+  Programming Language's General registry: `GalacticPotentials.jl`. Many scalar
+  potential fields defined in popular galactic dynamics Python packages --- 
+  `gala` and `galpy` --- are defined within `GalacticPotentials.jl` as 
+  `ModelingToolkit.jl` types. Each scalar field provided by 
+  `GalacticPotentials.jl` can be queried for its gradient, states, parameters,
+  and corresponding `ODESystem` and `ODEProblem` types through 
+  `ModelingToolkit.jl` functions.
 ---
 
-## Section
-This is a simple placeholder for the manuscript's main document [@knuth84].
+# Introduction {#sec-Introduction}
+
