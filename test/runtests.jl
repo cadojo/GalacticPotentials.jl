@@ -7,7 +7,7 @@ using ModelingToolkit, Symbolics
 
 using GalacticPotentials: AbstractField, AbstractScalarField, ScalarField
 
-@testset "Scalar Fields" begin
+@testset verbose = true "Scalar Fields" begin
     @variables t
     p = @parameters b
     q = @variables x(t) y(t) z(t)
@@ -20,25 +20,25 @@ using GalacticPotentials: AbstractField, AbstractScalarField, ScalarField
         name=:SomeField
     )
 
-    @testset "Constructors" begin
+    @testset showtiming = true "Constructors" begin
         @test field isa ModelingToolkit.AbstractSystem
     end
 
-    @testset "Calculations" begin
+    @testset showtiming = true "Calculations" begin
         @test all(calculate_jacobian(field) - calculate_gradient(field) .== 0)
         @test calculate_hessian(field) isa AbstractMatrix
     end
 
 end
 
-@testset "Galactic Potentials" begin
+@testset verbose = true "Galactic Potentials" begin
     for name in names(GalacticPotentials)
         !occursin("Potential", "$name") && continue
         occursin("Potentials", "$name") && continue
 
         @eval field = $name()
 
-        @testset "$name" begin
+        @testset showtiming = true "$name" begin
             N = length(states(field))
             M = length(parameters(field))
             @test field isa AbstractField
