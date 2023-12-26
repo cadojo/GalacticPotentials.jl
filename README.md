@@ -29,5 +29,5 @@ Python packages into the [SciML](https://sciml.ai) ecosystem.
 
 The scalar field symbolic-numerics are copied and modified versions of `AbstractSystem`
 interfaces within [`ModelingToolkit.jl`](https://github.com/sciml/ModelingToolkit.jl).
-The field implementations in this package are highly unstable; they will change in the 
+The field implementations in this package are highly unstable; they may change in the 
 near future.

@@ -220,8 +220,13 @@ The Satoh potential.
 """
 @memoize function SatohPotential(; name=:SatohPotential)
 
-    error("Not yet implemented!")
-
+    throw(
+        ErrorException(
+            """
+            The SatohPotential is not yet implemented. This potential requires special math functions, namely the gamma and lowergamma functions. These functions are provided by `SpecialFunctions.jl`, but some work is necessary to register these functions with `Symbolics.jl`. If you'd like to help, please submit a PR!
+            """
+        )
+    )
 end
 
 """
@@ -231,6 +236,11 @@ The StonePotential potential.
 """
 @memoize function StonePotential(; name=:StonePotential)
 
-    error("Not yet implemented!")
-
+    throw(
+        ErrorException(
+            """
+            The StonePotential is not yet implemented. This potential requires special math functions, namely the gamma and lowergamma functions. These functions are provided by `SpecialFunctions.jl`, but some work is necessary to register these functions with `Symbolics.jl`. If you'd like to help, please submit a PR!
+            """
+        )
+    )
 end
