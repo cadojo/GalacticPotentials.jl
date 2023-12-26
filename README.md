@@ -27,16 +27,16 @@ converted to `ODESystem` and `ODEProblem` types to interact with the rest of the
 
 ```julia
 using Plots
-
-using ModelingToolkit, DifferentialEquations
-using AstrodynamicalModels, GalacticPotentials
+using ModelingToolkit
+using DifferentialEquations
+using GalacticPotentials
 
 let model = ODESystem(PlummerPotential())
 
     p = @nonamespace Dict(
-        model.G => 6.6743e-20, # km³kg⁻¹s⁻²
-        model.m => 5.97219e31, # kg
-        model.b => 1e-6
+        model.G => 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
+        model.m => 6e31,       # mass (kg)
+        model.b => 1e-6        # softening parameter (unitless)
     )
 
     u0 = @nonamespace Dict(
@@ -53,11 +53,11 @@ let model = ODESystem(PlummerPotential())
     problem = ODEProblem(model, u0, ts, p)
     solution = solve(problem; reltol=1e-14, abstol=1e-14)
 
-    plot(solution; idxs=(:x,:y), label=:none, aspect_ratio=:equal)
+    plot(solution; idxs=(:x,:y), label=:none, dpi = 400, aspect_ratio=:equal)
 end
 ```
 
-![](/paper/img/plummer-orbit.png)
+![](/img/plummer-orbit.png)
 
 ## Credits
 

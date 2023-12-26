@@ -1,8 +1,8 @@
-function ModelingToolkit.ODESystem(field::AbstractScalarField)
+function ModelingToolkit.ODESystem(field::AbstractScalarField; var_map_to_dvs::AbstractDict{Symbol,Symbol}=Dict(:x => :ẋ, :y => :ẏ, :z => :ż))
 
     t = ModelingToolkit.get_iv(field)
     u = states(field)
-    u̇ = let du = map(x -> Symbol(first(split(x, "("))), "Δ" .* string.(u))
+    u̇ = let du = map(x -> Symbol(var_map_to_dvs[Symbol(first(split(string(x), "($(Symbolics.value(t)))")))]), u)
         vcat(
             (@variables($(δ)(t)) for δ in du)...
         )
@@ -11,7 +11,7 @@ function ModelingToolkit.ODESystem(field::AbstractScalarField)
     p = parameters(field)
     Δ = Differential(t)
 
-    name = field.name
+    name = field.name # TODO: when ModelingToolkit.jl updates, change to get_name
 
     eqs = vcat(
         Δ.(u) .~ u̇,

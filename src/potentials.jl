@@ -5,13 +5,23 @@ The potential due to a harmonic oscillator.
 """
 @memoize function HarmonicOscillatorPotential(N::Integer=1; name=:HarmonicOscillator)
 
-    @variables t (x(t))[1:N]
-    @parameters ω[1:N]
+    if N > 1
+        @variables t (x(t))[1:N]
+        @parameters ω[1:N]
 
-    x = collect(x)
-    ω = collect(ω)
+        x = collect(x)
+        ω = collect(ω)
 
-    value = (1 // 2) * ω ⋅ ω * x ⋅ x
+        value = (1 // 2) * ω ⋅ ω * x ⋅ x
+    else
+        @variables t x(t)
+        @parameters ω
+
+        value = (1 // 2) * ω^2 * x^2
+
+        x = [x]
+        ω = [ω]
+    end
 
     return ScalarField(value, t, x, ω; name=name)
 

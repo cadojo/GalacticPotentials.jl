@@ -6,8 +6,8 @@ abstract type AbstractField <: ModelingToolkit.AbstractTimeDependentSystem end
 abstract type AbstractScalarField <: AbstractField end
 
 # 
-# The implementations below are copied and modified versions of systems found in 
-# ModelingToolkit.jl. See the ModelingToolkit LICENSE below for more information.
+# The code below is copied and modified from ModelingToolkit.jl. 
+# See the ModelingToolkit LICENSE below for more information.
 # 
 # 
 # The ModelingToolkit.jl package is licensed under the MIT "Expat" License:
@@ -372,3 +372,7 @@ function Base.show(io::IO, mime::MIME"text/plain", sys::AbstractField)
     end
     return nothing
 end
+
+Base.show(io::IO, mime::MIME"text/html", sys::AbstractField) = show(io, mime, get_value(sys))
+Base.show(io::IO, mime::MIME"text/latex", sys::AbstractField) = show(io, mime, get_value(sys))
+

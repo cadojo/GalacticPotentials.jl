@@ -44,7 +44,7 @@ end
             @test field isa AbstractField
             @test calculate_gradient(field) isa AbstractVector
             @test ODESystem(field) isa ODESystem
-            @test ODEProblem(field, randn(N), (rand(), rand()), randn(M)) isa ODEProblem
+            @test ODEProblem(field, randn(2N), (rand(), rand()), randn(M)) isa ODEProblem
         end
     end
 
