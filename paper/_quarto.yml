@@ -7,25 +7,23 @@ manuscript:
 date: today
 date-format: long
 
+csl: astronomy-and-computing.csl
+
 format:
-  html: default
-  pdf: 
+  html: 
+    css: styles.css
+    title-block-banner: "#E6E6FA"
+    include-in-header: 
+      text: <meta name="theme-color" content="#E6E6FA"/>
+
+  arxiv-pdf: 
     fontsize: 12pt
-    mainfont: "CMU Serif"
-    documentclass: article
-    classoption: usletter
-    toc: false
     colorlinks: true
     urlcolor: "PaleGreen4!75!black"
-    latex-auto-install: false
-    geometry: 
-      - margin=1in
-      - nohead
-      - nomarginpar
-
 
 execute:
-  freeze: true
+  cache: true
+  echo: false
+  output: true
 
-
-
+jupyter: julia-1.9
