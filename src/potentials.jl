@@ -3,7 +3,7 @@ The potential due to a harmonic oscillator.
 
     $(LATEX_EXPRESSIONS["HarmonicOscillatorPotential"])
 """
-function HarmonicOscillatorPotential(N::Integer=1; name=:HarmonicOscillator)
+@memoize function HarmonicOscillatorPotential(N::Integer=1; name=:HarmonicOscillator)
 
     @variables t (x(t))[1:N]
     @parameters ω[1:N]
@@ -22,7 +22,7 @@ The Henon-Heiles potential.
 
     $(LATEX_EXPRESSIONS["HenonHeilesPotential"])
 """
-function HenonHeilesPotential(; name=:HenonHeilesPotential)
+@memoize function HenonHeilesPotential(; name=:HenonHeilesPotential)
 
     @variables t x(t) y(t)
 
@@ -37,7 +37,7 @@ The Hernquist potential.
 
     $(LATEX_EXPRESSIONS["HernquistPotential"])
 """
-function HernquistPotential(; name=:HernquistPotential)
+@memoize function HernquistPotential(; name=:HernquistPotential)
     @variables t x(t) y(t) z(t)
     @parameters G m c
 
@@ -51,7 +51,7 @@ The Isochrone potential.
 
     $(LATEX_EXPRESSIONS["IsochronePotential"])
 """
-function IsochronePotential(; name=:IsochronePotential)
+@memoize function IsochronePotential(; name=:IsochronePotential)
 
     @variables t x(t) y(t) z(t)
     @parameters G m b
@@ -65,7 +65,7 @@ end
 The Jaffe potential.
     $(LATEX_EXPRESSIONS["JaffePotential"])
 """
-function JaffePotential(; name=:JaffePotential)
+@memoize function JaffePotential(; name=:JaffePotential)
 
     @variables t x(t) y(t) z(t)
     @parameters G m c
@@ -83,7 +83,7 @@ The Kepler potential.
 
     $(LATEX_EXPRESSIONS["KeplerPotential"])
 """
-function KeplerPotential(; name=:KeplerPotential)
+@memoize function KeplerPotential(; name=:KeplerPotential)
 
     @variables t x(t) y(t) z(t)
     @parameters G m
@@ -98,7 +98,7 @@ The Kuzmin potential.
 
     $(LATEX_EXPRESSIONS["KuzminPotential"])
 """
-function KuzminPotential(; name=:KuzminPotential)
+@memoize function KuzminPotential(; name=:KuzminPotential)
 
     @variables t x(t) y(t) z(t)
     @parameters G m a
@@ -112,7 +112,7 @@ The logarithmic potential.
 
     $(LATEX_EXPRESSIONS["LogarithmicPotential"])
 """
-function LogarithmicPotential(; name=:LogarithmicPotential)
+@memoize function LogarithmicPotential(; name=:LogarithmicPotential)
 
     @variables t x(t) y(t) z(t)
     @parameters v r q[1:3]
@@ -128,7 +128,7 @@ The long Murali-bar potential.
 
     $(LATEX_EXPRESSIONS["LongMuraliBarPotential"])
 """
-function LongMuraliBarPotential(; name=:LongMuraliBarPotential)
+@memoize function LongMuraliBarPotential(; name=:LongMuraliBarPotential)
 
     @variables t
     u = @variables x(t) y(t) z(t)
@@ -148,7 +148,7 @@ The Miyamoto-Nagai potential.
 
     $(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])
 """
-function MiyamotoNagaiPotential(; name=:MiyamotoNagaiPotential)
+@memoize function MiyamotoNagaiPotential(; name=:MiyamotoNagaiPotential)
 
     @variables t
     u = @variables x(t) y(t) z(t)
@@ -165,7 +165,7 @@ The NFW potential.
 
     $(LATEX_EXPRESSIONS["NFWPotential"])
 """
-function NFWPotential(; name=:NFWPotential)
+@memoize function NFWPotential(; name=:NFWPotential)
     @variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b c r
@@ -180,7 +180,7 @@ The Plummer potential.
 
     $(LATEX_EXPRESSIONS["PlummerPotential"])
 """
-function PlummerPotential(; name=:PlummerPotential)
+@memoize function PlummerPotential(; name=:PlummerPotential)
     @variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m b
@@ -194,7 +194,7 @@ The power-law cutoff potential.
 
     $(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])
 """
-function PowerLawCutoffPotential(; name=:PowerLawCutoffPotential)
+@memoize function PowerLawCutoffPotential(; name=:PowerLawCutoffPotential)
 
     @variables t
     u = @variables x(t) y(t) z(t)
@@ -218,7 +218,7 @@ The Satoh potential.
 
     $(LATEX_EXPRESSIONS["SatohPotential"])
 """
-function SatohPotential(; name=:SatohPotential)
+@memoize function SatohPotential(; name=:SatohPotential)
 
     error("Not yet implemented!")
 
@@ -229,7 +229,7 @@ The StonePotential potential.
 
     $(LATEX_EXPRESSIONS["StonePotential"])
 """
-function StonePotential(; name=:StonePotential)
+@memoize function StonePotential(; name=:StonePotential)
 
     error("Not yet implemented!")
 

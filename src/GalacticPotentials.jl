@@ -20,6 +20,7 @@ using LinearAlgebra
 using ForwardDiff
 using ModelingToolkit
 using SciMLBase
+using Memoize
 
 export
     ScalarField,
