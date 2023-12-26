@@ -8,7 +8,7 @@ makedocs(
     pages=[
         "Overview" => [
             "Getting Started" => "index.md",
-            "Docstrings" => "docstrings.md"
+            "Reference" => "reference.md"
         ],
     ]
 )
