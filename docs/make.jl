@@ -1,6 +1,7 @@
 using Documenter
 using GalacticPotentials
 
+
 makedocs(
     sitename="GalacticPotentials",
     format=Documenter.HTML(),
@@ -8,8 +9,10 @@ makedocs(
     pages=[
         "Overview" => [
             "Getting Started" => "index.md",
-            "Reference" => "reference.md"
+            "Gravitational Potentials" => "potentials.md",
+            "Example Usage" => "examples.md",
         ],
+        "Reference" => "reference.md"
     ]
 )
 

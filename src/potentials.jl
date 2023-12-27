@@ -1,7 +1,7 @@
 """
 The potential due to a harmonic oscillator.
 
-    $(LATEX_EXPRESSIONS["HarmonicOscillatorPotential"])
+\$$(LATEX_EXPRESSIONS["HarmonicOscillatorPotential"])\$
 """
 @memoize function HarmonicOscillatorPotential(N::Integer=1; name=:HarmonicOscillator)
 
@@ -30,7 +30,7 @@ end
 """
 The Henon-Heiles potential.
 
-    $(LATEX_EXPRESSIONS["HenonHeilesPotential"])
+\$$(LATEX_EXPRESSIONS["HenonHeilesPotential"])\$
 """
 @memoize function HenonHeilesPotential(; name=:HenonHeilesPotential)
 
@@ -45,7 +45,7 @@ end
 """
 The Hernquist potential.
 
-    $(LATEX_EXPRESSIONS["HernquistPotential"])
+\$$(LATEX_EXPRESSIONS["HernquistPotential"])\$
 """
 @memoize function HernquistPotential(; name=:HernquistPotential)
     @variables t x(t) y(t) z(t)
@@ -59,7 +59,7 @@ end
 """
 The Isochrone potential.
 
-    $(LATEX_EXPRESSIONS["IsochronePotential"])
+\$$(LATEX_EXPRESSIONS["IsochronePotential"])\$
 """
 @memoize function IsochronePotential(; name=:IsochronePotential)
 
@@ -73,7 +73,8 @@ end
 
 """
 The Jaffe potential.
-    $(LATEX_EXPRESSIONS["JaffePotential"])
+
+\$$(LATEX_EXPRESSIONS["JaffePotential"])\$
 """
 @memoize function JaffePotential(; name=:JaffePotential)
 
@@ -91,14 +92,14 @@ end
 """
 The Kepler potential.
 
-    $(LATEX_EXPRESSIONS["KeplerPotential"])
+\$$(LATEX_EXPRESSIONS["KeplerPotential"])\$
 """
 @memoize function KeplerPotential(; name=:KeplerPotential)
 
     @variables t x(t) y(t) z(t)
     @parameters G m
 
-    value = G * m / sqrt(x^2 + y^2 + z^2)
+    value = -G * m / sqrt(x^2 + y^2 + z^2)
     return ScalarField(value, t, [x, y, z], [G, m]; name=name)
 
 end
@@ -106,7 +107,7 @@ end
 """
 The Kuzmin potential.
 
-    $(LATEX_EXPRESSIONS["KuzminPotential"])
+\$$(LATEX_EXPRESSIONS["KuzminPotential"])\$
 """
 @memoize function KuzminPotential(; name=:KuzminPotential)
 
@@ -120,7 +121,7 @@ end
 """
 The logarithmic potential.
 
-    $(LATEX_EXPRESSIONS["LogarithmicPotential"])
+\$$(LATEX_EXPRESSIONS["LogarithmicPotential"])\$
 """
 @memoize function LogarithmicPotential(; name=:LogarithmicPotential)
 
@@ -136,7 +137,7 @@ end
 """
 The long Murali-bar potential.
 
-    $(LATEX_EXPRESSIONS["LongMuraliBarPotential"])
+\$$(LATEX_EXPRESSIONS["LongMuraliBarPotential"])\$
 """
 @memoize function LongMuraliBarPotential(; name=:LongMuraliBarPotential)
 
@@ -156,7 +157,7 @@ end
 """
 The Miyamoto-Nagai potential.
 
-    $(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])
+\$$(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])\$
 """
 @memoize function MiyamotoNagaiPotential(; name=:MiyamotoNagaiPotential)
 
@@ -173,7 +174,7 @@ end
 """
 The NFW potential.
 
-    $(LATEX_EXPRESSIONS["NFWPotential"])
+\$$(LATEX_EXPRESSIONS["NFWPotential"])\$
 """
 @memoize function NFWPotential(; name=:NFWPotential)
     @variables t
@@ -188,7 +189,7 @@ end
 """
 The Plummer potential.
 
-    $(LATEX_EXPRESSIONS["PlummerPotential"])
+\$$(LATEX_EXPRESSIONS["PlummerPotential"])\$
 """
 @memoize function PlummerPotential(; name=:PlummerPotential)
     @variables t
@@ -202,7 +203,10 @@ end
 """
 The power-law cutoff potential.
 
-    $(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])
+!!! warning
+    Not yet implemented!
+
+\$$(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])\$
 """
 @memoize function PowerLawCutoffPotential(; name=:PowerLawCutoffPotential)
 
@@ -226,7 +230,10 @@ end
 """
 The Satoh potential.
 
-    $(LATEX_EXPRESSIONS["SatohPotential"])
+!!! warning
+    Not yet implemented!
+
+\$$(LATEX_EXPRESSIONS["SatohPotential"])\$
 """
 @memoize function SatohPotential(; name=:SatohPotential)
 
@@ -242,7 +249,10 @@ end
 """
 The StonePotential potential.
 
-    $(LATEX_EXPRESSIONS["StonePotential"])
+!!! warning
+    Not yet implemented!
+
+\$$(LATEX_EXPRESSIONS["StonePotential"])\$
 """
 @memoize function StonePotential(; name=:StonePotential)
 

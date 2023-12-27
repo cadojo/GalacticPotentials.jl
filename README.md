@@ -21,7 +21,7 @@ pkg> GalacticPotentials             # in Julia's REPL
 
 ## Usage
 
-Potentials are defined as subtypes of `ModelingToolkit.jl` models. They can be 
+Potentials are defined as subtypes of `ModelingToolkit.jl` models. They can be
 converted to `ODESystem` and `ODEProblem` types to interact with the rest of the
 `SciML` ecosystem.
 
@@ -40,11 +40,11 @@ let model = ODESystem(PlummerPotential())
     )
 
     u0 = @nonamespace Dict(
-        model.x => 11e5, 
-        model.y => 5e5, 
+        model.x => 11e5,
+        model.y => 5e5,
         model.z => 0,
-        model.Δx => 1e3, 
-        model.Δy => 1e3, 
+        model.Δx => 1e3,
+        model.Δy => 1e3,
         model.Δz => 0
     )
 
@@ -57,16 +57,16 @@ let model = ODESystem(PlummerPotential())
 end
 ```
 
-![](/img/plummer-orbit.png)
+![](/docs/src/img/plummer-orbit.png)
 
 ## Credits
 
 This package is [bootstrapped](/gen/gala.jl) off of [`gala`](http://gala.adrian.pw)
-and [`galpy`](https://docs.galpy.org), two rich Python packages for galactic dynamics. 
+and [`galpy`](https://docs.galpy.org), two rich Python packages for galactic dynamics.
 I aim to learn about galactic dynamics by integrating the models within these two popular
-Python packages into the [SciML](https://sciml.ai) ecosystem. 
+Python packages into the [SciML](https://sciml.ai) ecosystem.
 
 The scalar field symbolic-numerics are copied and modified versions of `AbstractSystem`
 interfaces within [`ModelingToolkit.jl`](https://github.com/sciml/ModelingToolkit.jl).
-The field implementations in this package are highly unstable; they may change in the 
+The field implementations in this package are highly unstable; they may change in the
 near future.
