@@ -1,0 +1,7 @@
+code {
+    background-color: transparent;
+}
+
+p code:not(.sourceCode) {
+    background-color: transparent;
+}
