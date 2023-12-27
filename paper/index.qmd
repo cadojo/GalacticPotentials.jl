@@ -1,0 +1,64 @@
+---
+title: "`GalacticPotentials.jl`"
+subtitle: Symbolic Expressions for Galactic Potential Fields
+bibliography: references.bib
+
+authors:
+  - name: 
+      given: Joseph
+      family: Carpinelli
+      literal: "Joseph D Carpinelli"
+    roles: writing
+    corresponding: true
+
+abstract: |
+  Galactic dynamics simulations often use scalar potential fields for 
+  numerically integrating point masses within larger gravitational fields. The 
+  gradient of the scalar field provides the equations of motion for a point 
+  mass within the field. This paper introduces a new package to the Julia 
+  Programming Language's General registry: `GalacticPotentials.jl`. Many scalar
+  potential fields defined in popular galactic dynamics Python packages --- 
+  `gala` and `galpy` --- are defined within `GalacticPotentials.jl` as 
+  `ModelingToolkit.jl` types. Each scalar field provided by 
+  `GalacticPotentials.jl` can be queried for its gradient, states, parameters,
+  and corresponding `ODESystem` and `ODEProblem` types through 
+  `ModelingToolkit.jl` functions.
+---
+
+```{julia}
+#| echo: false
+#| output: false
+import Pkg
+Pkg.activate(".")
+Pkg.instantiate()
+
+using Plots
+using ModelingToolkit, DifferentialEquations
+using AstrodynamicalModels, GalacticPotentials
+```
+
+# Introduction {#sec-introduction}
+
+Multiple popular galactic dynamics software packages are available within 
+Python's open-source ecosystem, including `galpy` and `gala` [@galpy;@gala]. 
+While the Julia Programming Language's open-source package ecosystem hosts many
+modeling and simulation acceleration tools, relatively few packages in the 
+[General](https://github.com/JuliaRegistries/General) target astrophysical 
+simulation applications. This paper presents a new package --- 
+[`GalacticPotentials.jl`](https://github.com/cadojo/GalacticPotentials.jl) ---
+which integrates a large subset `galpy`'s and `gala`'s potential field equations 
+with `SciML` ecosystem tools. First, a brief review of the `SciML` interfaces 
+which are relevant to galactic dynamics is presented. Finally, the potentials
+within `GalacticPotentials.jl` are presented alongside common examples. For 
+more information about using `GalacticPotentials.jl`, see the package 
+[documentation](https://docs.loopy.codes/GalacticPotentials.jl).
+
+# Review of `SciML` Interfaces {#sec-review}
+
+The `SciML` --- _scientific machine learning_ --- group builds Julia packages
+which provide state-of-the-art modeling and simulation capabilities. 
+
+# References {#sec-references}
+
+:::{#refs}
+:::
