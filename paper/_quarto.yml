@@ -16,14 +16,11 @@ format:
     include-in-header: 
       text: <meta name="theme-color" content="#E6E6FA"/>
 
+  markdown: 
+    output-file: paper
+
   arxiv-pdf: 
+    output-file: preprint
     fontsize: 12pt
     colorlinks: true
     urlcolor: "PaleGreen4!75!black"
-
-execute:
-  cache: true
-  echo: false
-  output: true
-
-jupyter: julia-1.9
