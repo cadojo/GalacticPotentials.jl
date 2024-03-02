@@ -12,7 +12,7 @@ Alternatively, default state derivative symbols are used: :ẋ, :ẏ, and :ż f
 function ModelingToolkit.ODESystem(field::AbstractScalarField; var_map_to_dvs::Union{<:AbstractDict,<:Nothing}=nothing)
 
     t = ModelingToolkit.get_iv(field)
-    u = states(field)
+    u = unknowns(field)
 
     if isnothing(var_map_to_dvs)
         if string.(collect(u)) == ["x($t)", "y($t)", "z($t)"][CartesianIndices(u)]
@@ -48,7 +48,7 @@ end
 function SciMLBase.ODEProblem(field::AbstractScalarField, args...; kwargs...)
 
     return ODEProblem(
-        ODESystem(field),
+        complete(ODESystem(field); split=false),
         args...; kwargs...,
     )
 

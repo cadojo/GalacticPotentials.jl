@@ -39,12 +39,12 @@ end
         @eval field = $name()
 
         @testset showtiming = true "$name" begin
-            N = length(states(field))
+            N = length(unknowns(field))
             M = length(parameters(field))
             @test field isa AbstractField
-            @test calculate_gradient(field) isa AbstractVector
+            @test calculate_gradient(complete(field; split=false)) isa AbstractVector
             @test ODESystem(field) isa ODESystem
-            @test ODEProblem(field, randn(2N), (rand(), rand()), randn(M)) isa ODEProblem
+            @test ODEProblem(complete(field; split=false), randn(2N), (rand(), rand()), randn(M)) isa ODEProblem
         end
     end
 

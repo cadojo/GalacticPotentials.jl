@@ -1,7 +1,7 @@
 name = "GalacticPotentials"
 uuid = "761e15e1-915f-4e6a-be22-a19e6141b375"
 authors = ["Joey Carpinelli <joey@loopy.codes>"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
@@ -22,7 +22,7 @@ DocStringExtensions = "0.9"
 ForwardDiff = "0.10"
 LaTeXStrings = "1.3"
 Memoize = "0.4"
-ModelingToolkit = "8.72"
+ModelingToolkit = "~9.3"
 ReverseDiff = "1"
 SciMLBase = "2"
 SpecialFunctions = "2"
