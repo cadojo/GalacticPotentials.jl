@@ -5,14 +5,16 @@
 # GalacticPotentials.jl. Thank you Gala!
 #
 
-ENV["PYTHON"] = "/opt/homebrew/bin/python3" # must have `gala` installed!
+run(`rm -rf $(joinpath(@__DIR__, "venv"))`)
+run(`python3 -m venv $(joinpath(@__DIR__, "venv"))`)
+run(`$(joinpath(@__DIR__, "venv", "bin", "pip")) install -U gala -U sympy`)
+ENV["PYTHON"] = joinpath(@__DIR__, "venv", "bin", "python")
 
 import Pkg
-Pkg.activate(@__DIR__)
-Pkg.instantiate()
-Pkg.build("PyCall")
+Pkg.build()
 
 using Dates
+
 using PyCall, SymPy, LaTeXStrings
 
 gala = pyimport("gala.potential")

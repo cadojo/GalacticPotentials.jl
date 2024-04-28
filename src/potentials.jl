@@ -200,6 +200,8 @@ The Plummer potential.
     return ScalarField(value, t, u, p; name=name)
 end
 
+
+
 """
 The power-law cutoff potential.
 
@@ -222,7 +224,7 @@ The power-law cutoff potential.
         )
     )
 
-    value = G * α * m * γ * (3 // 2 - α / 2) # TODO: finish this value!
+
     return ScalarField(value, t, u, p; name=name)
 
 end
