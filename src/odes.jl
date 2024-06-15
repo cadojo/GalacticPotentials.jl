@@ -25,10 +25,11 @@ function ModelingToolkit.ODESystem(field::AbstractScalarField; var_map_to_dvs::U
         du = map(x -> Symbol(var_map_to_dvs[Symbol(first(split(string(x), "($(Symbolics.value(t)))")))]), u)
     end
 
-    u̇ = vcat(
-        (@variables($(δ)(t)) for δ in du)...
+    u̇ = getfield.(
+        vcat((@variables($(δ)(t)) for δ in du)...),
+        :val
     )
-
+    
     p = parameters(field)
     Δ = Differential(t)
 

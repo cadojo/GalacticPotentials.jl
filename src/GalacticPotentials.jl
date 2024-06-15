@@ -14,13 +14,16 @@ using DocStringExtensions
                                $(DOCSTRING)
                                """
 
+using Reexport
+@reexport using ModelingToolkit
+
 using Symbolics, SymbolicUtils
 using LaTeXStrings
 using LinearAlgebra
 using ForwardDiff
-using ModelingToolkit
 using SciMLBase
 using Memoize
+using SpecialFunctions
 
 export
     ScalarField,
@@ -36,17 +39,14 @@ export
     MiyamotoNagaiPotential,
     NFWPotential,
     PlummerPotential,
-    # PowerLawCutoffPotential,
-    # SatohPotential,
-    # StonePotential,
-    states,
-    parameters,
-    ODESystem,
-    ODEProblem
+    PowerLawCutoffPotential,
+    SatohPotential,
+    StonePotential    
 
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
+include("functions.jl")
 include("generic.jl")
 include("potentials.jl")
 include("odes.jl")
 
-end # module GalacticPotentials
+end # module GalacticPotentialsj
