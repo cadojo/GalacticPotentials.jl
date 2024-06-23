@@ -3,7 +3,8 @@ The potential due to a harmonic oscillator.
 
 \$$(LATEX_EXPRESSIONS["HarmonicOscillatorPotential"])\$
 """
-@memoize function HarmonicOscillatorPotential(N::Integer = 1; name = :HarmonicOscillator, kwargs...)
+@memoize function HarmonicOscillatorPotential(
+        N::Integer = 1; name = :HarmonicOscillator, kwargs...)
     if N > 1
         @variables t (x(t))[1:N]
         @parameters ω[1:N]
@@ -20,7 +21,7 @@ The potential due to a harmonic oscillator.
 
         x = [x]
         ω = [ω]
-    else  
+    else
         error("Argument `$N` must be greater than zero!")
     end
 
@@ -204,14 +205,14 @@ The power-law cutoff potential.
 @memoize function PowerLawCutoffPotential(; name = :PowerLawCutoffPotential, kwargs...)
     @variables t
     u = @variables x(t) y(t) z(t)
-    p = @parameters G m a α γ r
+    p = @parameters G m a α c
 
-    value = G * α * m * lowergamma(1.5 - α / 2, (x^2 + y^2 + z^2) / r^2) / 
-            (2 * sqrt(x^2 + y^2 + z^2) * gamma(2.5 - α / 2)) -
-            3 * G * m * lowergamma(1.5 - α / 2, (x^2 + y^2 + z^2) / r^2) /
-            (2 * sqrt(x^2 + y^2 + z^2) * gamma(2.5 - α / 2)) +
-            G * m * lowergamma(1 - α / 2, (x^2 + y^2 + z^2) / r^2) /
-            (r * gamma(1.5 - α / 2))
+    value = G * α * m * lowergamma(3 // 2 - α // 2, (x^2 + y^2 + z^2) / c^2) /
+            (2 * sqrt(x^2 + y^2 + z^2) * gamma(5 // 2 - α // 2)) -
+            3 * G * m * lowergamma(3 // 2 - α // 2, (x^2 + y^2 + z^2) / c^2) /
+            (2 * sqrt(x^2 + y^2 + z^2) * gamma(5 // 2 - α // 2)) +
+            G * m * lowergamma(1 - α // 2, (x^2 + y^2 + z^2) / c^2) /
+            (c * gamma(3 // 2 - α // 2))
 
     return ScalarField(value, t, u, p; name = name, kwargs...)
 end
@@ -229,7 +230,7 @@ The Satoh potential.
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b
 
-    value = -G*m/sqrt(a*(a + 2*sqrt(b^2 + z^2)) + x^2 + y^2 + z^2)
+    value = -G * m / sqrt(a * (a + 2 * sqrt(b^2 + z^2)) + x^2 + y^2 + z^2)
 
     return ScalarField(value, t, u, p; name = name, kwargs...)
 end
@@ -247,7 +248,11 @@ The StonePotential potential.
     u = @variables x(t) y(t) z(t)
     p = @parameters G m rᵪ rₕ
 
-    value = -2*G*m*(-rᵪ*atan(sqrt(x^2 + y^2 + z^2)/rᵪ)/sqrt(x^2 + y^2 + z^2) + rₕ*atan(sqrt(x^2 + y^2 + z^2)/rₕ)/sqrt(x^2 + y^2 + z^2) + 0.5*log((rₕ^2 + x^2 + y^2 + z^2)/(rᵪ^2 + x^2 + y^2 + z^2)))/(-π*rᵪ + π*rₕ)
+    value = -2 * G * m *
+            (-rᵪ * atan(sqrt(x^2 + y^2 + z^2) / rᵪ) / sqrt(x^2 + y^2 + z^2) +
+             rₕ * atan(sqrt(x^2 + y^2 + z^2) / rₕ) / sqrt(x^2 + y^2 + z^2) +
+             0.5 * log((rₕ^2 + x^2 + y^2 + z^2) / (rᵪ^2 + x^2 + y^2 + z^2))) /
+            (-π * rᵪ + π * rₕ)
 
     return ScalarField(value, t, u, p; name = name, kwargs...)
 end

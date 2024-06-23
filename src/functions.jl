@@ -6,14 +6,24 @@
 Computes the lower incomplete gamma function.
 """
 function lowergamma(a, x)
-    p, q = gamma_inc(a, x)
+    p, q = SpecialFunctions.gamma_inc(a, x)
     return p * gamma(a)
 end
 
-@register_symbolic lowergamma(x, y)
-@register_symbolic gamma(x)
+"""
+Computes the gamma function through `SpecialFunctions.gamma`.
 
-function ModelingToolkit.derivative(::typeof(gamma), args::NTuple{1, Any}, ::Val{1})
+!!! note
+    This wrapper is required for Symbolics function registration purposes. 
+"""
+function gamma(x)
+    return SpecialFunctions.gamma(x)
+end
+
+@register_symbolic lowergamma(x::Real, y::Real)
+@register_symbolic gamma(x::Real)
+
+function Symbolics.derivative(::typeof(gamma), args::NTuple{1, Any}, ::Val{1})
     return ForwardDiff.derivative(gamma, first(args))
 end
 

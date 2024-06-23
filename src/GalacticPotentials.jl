@@ -1,6 +1,5 @@
 module GalacticPotentials
 
-
 using DocStringExtensions
 @template (FUNCTIONS, METHODS, MACROS) = """
                                          $(SIGNATURES)
@@ -23,25 +22,26 @@ using LinearAlgebra
 using ForwardDiff
 using SciMLBase
 using Memoize
-using SpecialFunctions
+
+import SpecialFunctions
 
 export
-    ScalarField,
-    HarmonicOscillatorPotential,
-    HenonHeilesPotential,
-    HernquistPotential,
-    IsochronePotential,
-    JaffePotential,
-    KeplerPotential,
-    KuzminPotential,
-    LogarithmicPotential,
-    LongMuraliBarPotential,
-    MiyamotoNagaiPotential,
-    NFWPotential,
-    PlummerPotential,
-    PowerLawCutoffPotential,
-    SatohPotential,
-    StonePotential    
+       ScalarField,
+       HarmonicOscillatorPotential,
+       HenonHeilesPotential,
+       HernquistPotential,
+       IsochronePotential,
+       JaffePotential,
+       KeplerPotential,
+       KuzminPotential,
+       LogarithmicPotential,
+       LongMuraliBarPotential,
+       MiyamotoNagaiPotential,
+       NFWPotential,
+       PlummerPotential,
+       PowerLawCutoffPotential,
+       SatohPotential,
+       StonePotential
 
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("functions.jl")
