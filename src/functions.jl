@@ -10,18 +10,8 @@ function lowergamma(a, x)
     return p * gamma(a)
 end
 
-"""
-Computes the gamma function through `SpecialFunctions.gamma`.
-
-!!! note
-    This wrapper is required for Symbolics function registration purposes. 
-"""
-function gamma(x)
-    return SpecialFunctions.gamma(x)
-end
-
 @register_symbolic lowergamma(x::AbstractFloat, y::AbstractFloat)
-@register_symbolic gamma(x::AbstractFloat)
+# @register_symbolic SpecialFunctions.gamma(x::AbstractFloat)
 @register_symbolic HypergeometricFunctions.M(
     a::AbstractFloat, b::AbstractFloat, x::AbstractFloat)
 

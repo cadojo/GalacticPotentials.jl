@@ -51,4 +51,4 @@ include("generic.jl")
 include("potentials.jl")
 include("odes.jl")
 
-end # module GalacticPotentialsj
+end # module GalacticPotentials

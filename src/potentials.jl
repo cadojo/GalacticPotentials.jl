@@ -1,3 +1,8 @@
+# function ScalarField(value, t, u, p; kwargs...)
+#     @variables Φ(t)
+#     return ODESystem([Φ ~ value], t, vcat(u, Φ), p; kwargs...)
+# end
+
 """
 The potential due to a harmonic oscillator.
 
@@ -208,11 +213,11 @@ The power-law cutoff potential.
     p = @parameters G m a α c
 
     value = G * α * m * lowergamma(3 // 2 - α // 2, (x^2 + y^2 + z^2) / c^2) /
-            (2 * sqrt(x^2 + y^2 + z^2) * gamma(5 // 2 - α // 2)) -
+            (2 * sqrt(x^2 + y^2 + z^2) * SpecialFunctions.gamma(5 // 2 - α // 2)) -
             3 * G * m * lowergamma(3 // 2 - α // 2, (x^2 + y^2 + z^2) / c^2) /
-            (2 * sqrt(x^2 + y^2 + z^2) * gamma(5 // 2 - α // 2)) +
+            (2 * sqrt(x^2 + y^2 + z^2) * SpecialFunctions.gamma(5 // 2 - α // 2)) +
             G * m * lowergamma(1 - α // 2, (x^2 + y^2 + z^2) / c^2) /
-            (c * gamma(3 // 2 - α // 2))
+            (c * SpecialFunctions.gamma(3 // 2 - α // 2))
 
     return ScalarField(value, t, u, p; name = name, kwargs...)
 end
@@ -255,4 +260,46 @@ The StonePotential potential.
             (-π * rᵪ + π * rₕ)
 
     return ScalarField(value, t, u, p; name = name, kwargs...)
+end
+
+"""
+Galactic potentials for our home galaxy: the Milky Way.
+"""
+module MilkyWay
+
+using GalacticPotentials
+using ModelingToolkit
+using Memoize
+
+"""
+A potential field for the Milky Way galaxy, based off of Dr. Bovy's 2015 paper.
+"""
+@memoize function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
+
+    # default_disk = dict(m=68193902782.346756 * u.Msun, a=3.0 * u.kpc, b=280 * u.pc)
+    # default_bulge = dict(m=4501365375.06545 * u.Msun, alpha=1.8, r_c=1.9 * u.kpc)
+    # default_halo = dict(m=4.3683325e11 * u.Msun, r_s=16 * u.kpc)
+
+    @variables t Φ(t) x(t) y(t) z(t)
+    disk = MiyamotoNagaiPotential(; name = :Disk)
+    bulge = PowerLawCutoffPotential(; name = :Bulge)
+    halo = NFWPotential(; name = :Halo)
+
+    eqs = vcat(
+        Φ ~ disk.Φ + bulge.Φ + halo.Φ,
+        disk.x ~ x,
+        disk.y ~ y,
+        disk.z ~ z,
+        bulge.x ~ x,
+        bulge.y ~ y,
+        bulge.z ~ z,
+        halo.x ~ x,
+        halo.y ~ y,
+        halo.z ~ z
+    )
+
+    return compose(
+        ODESystem(eqs, t; name = :MilkyWay), disk, bulge, halo)
+end
+
 end
