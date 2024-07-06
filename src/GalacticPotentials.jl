@@ -20,10 +20,12 @@ using Symbolics, SymbolicUtils
 using LaTeXStrings
 using LinearAlgebra
 using ForwardDiff
+using FiniteDiff
 using SciMLBase
 using Memoize
 
 import SpecialFunctions
+import HypergeometricFunctions
 
 export
        ScalarField,

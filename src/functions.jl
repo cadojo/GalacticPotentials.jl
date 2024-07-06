@@ -20,19 +20,17 @@ function gamma(x)
     return SpecialFunctions.gamma(x)
 end
 
-@register_symbolic lowergamma(x::Real, y::Real)
-@register_symbolic gamma(x::Real)
-
-function Symbolics.derivative(::typeof(gamma), args::NTuple{1, Any}, ::Val{1})
-    return ForwardDiff.derivative(gamma, first(args))
-end
+@register_symbolic lowergamma(x::AbstractFloat, y::AbstractFloat)
+@register_symbolic gamma(x::AbstractFloat)
+@register_symbolic HypergeometricFunctions.M(
+    a::AbstractFloat, b::AbstractFloat, x::AbstractFloat)
 
 function Symbolics.derivative(::typeof(lowergamma), args::NTuple{2, Any}, ::Val{1})
-    x, y = args
-    return ForwardDiff.derivative(x -> lowergamma(x, y), x)
+    a, x = args
+    return (x^a / a) * HypergeometricFunctions.M(a, a + 1, -x) # https://github.com/JuliaMath/HypergeometricFunctions.jl/issues/50#issuecomment-1397363491
 end
 
 function Symbolics.derivative(::typeof(lowergamma), args::NTuple{2, Any}, ::Val{2})
-    x, y = args
-    return ForwardDiff.derivative(y -> lowergamma(x, y), y)
+    a, x = args
+    return -x^(a - 1) * exp(-x) # https://en.wikipedia.org/wiki/Incomplete_gamma_function#Derivatives
 end
