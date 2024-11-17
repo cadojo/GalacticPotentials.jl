@@ -16,7 +16,7 @@ using DocStringExtensions
 using Reexport
 @reexport using ModelingToolkit
 
-using Symbolics, SymbolicUtils
+using Symbolics
 using LaTeXStrings
 using LinearAlgebra
 using ForwardDiff
@@ -47,8 +47,6 @@ export
 
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("functions.jl")
-include("generic.jl")
 include("potentials.jl")
-include("odes.jl")
 
 end # module GalacticPotentials

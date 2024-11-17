@@ -1,7 +1,7 @@
-# function ScalarField(value, t, u, p; kwargs...)
-#     @variables Φ(t)
-#     return ODESystem([Φ ~ value], t, vcat(u, Φ), p; kwargs...)
-# end
+function ScalarField(value, t, u, p; kwargs...)
+    @variables Φ(t)
+    return ODESystem([Φ ~ value], t, vcat(u, Φ), p; kwargs...)
+end
 
 """
 The potential due to a harmonic oscillator.
@@ -11,7 +11,8 @@ The potential due to a harmonic oscillator.
 @memoize function HarmonicOscillatorPotential(
         N::Integer = 1; name = :HarmonicOscillator, kwargs...)
     if N > 1
-        @variables t (x(t))[1:N]
+        @independent_variables t
+        @variables (x(t))[1:N]
         @parameters ω[1:N]
 
         x = collect(x)
@@ -19,7 +20,8 @@ The potential due to a harmonic oscillator.
 
         value = (1 // 2) * ω ⋅ ω * x ⋅ x
     elseif N == 1
-        @variables t x(t)
+        @independent_variables t
+        @variables x(t)
         @parameters ω
 
         value = (1 // 2) * ω^2 * x^2
@@ -39,7 +41,8 @@ The Henon-Heiles potential.
 \$$(LATEX_EXPRESSIONS["HenonHeilesPotential"])\$
 """
 @memoize function HenonHeilesPotential(; name = :HenonHeilesPotential, kwargs...)
-    @variables t x(t) y(t)
+    @independent_variables t
+    @variables x(t) y(t)
 
     value = x^2 * y + (1 // 2) * x^2 - (1 // 3) * y^3 + (1 // 2)y^2
 
@@ -52,7 +55,8 @@ The Hernquist potential.
 \$$(LATEX_EXPRESSIONS["HernquistPotential"])\$
 """
 @memoize function HernquistPotential(; name = :HernquistPotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters G m c
 
     value = -(G * m) / (c + sqrt(x^2 + y^2 + z^2))
@@ -65,7 +69,8 @@ The Isochrone potential.
 \$$(LATEX_EXPRESSIONS["IsochronePotential"])\$
 """
 @memoize function IsochronePotential(; name = :IsochronePotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters G m b
 
     value = -(G * m) / (b + sqrt(b^2 + x^2 + y^2 + z^2))
@@ -78,7 +83,8 @@ The Jaffe potential.
 \$$(LATEX_EXPRESSIONS["JaffePotential"])\$
 """
 @memoize function JaffePotential(; name = :JaffePotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters G m c
 
     value = G * m * log10(
@@ -94,7 +100,8 @@ The Kepler potential.
 \$$(LATEX_EXPRESSIONS["KeplerPotential"])\$
 """
 @memoize function KeplerPotential(; name = :KeplerPotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters G m
 
     value = -G * m / sqrt(x^2 + y^2 + z^2)
@@ -107,7 +114,8 @@ The Kuzmin potential.
 \$$(LATEX_EXPRESSIONS["KuzminPotential"])\$
 """
 @memoize function KuzminPotential(; name = :KuzminPotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters G m a
 
     value = -(G * m) / sqrt(x^2 + y^2 + (a + abs(z))^2)
@@ -120,7 +128,8 @@ The logarithmic potential.
 \$$(LATEX_EXPRESSIONS["LogarithmicPotential"])\$
 """
 @memoize function LogarithmicPotential(; name = :LogarithmicPotential, kwargs...)
-    @variables t x(t) y(t) z(t)
+    @independent_variables t
+    @variables x(t) y(t) z(t)
     @parameters v r q[1:3]
 
     q = collect(q)
@@ -136,7 +145,7 @@ The long Murali-bar potential.
 \$$(LATEX_EXPRESSIONS["LongMuraliBarPotential"])\$
 """
 @memoize function LongMuraliBarPotential(; name = :LongMuraliBarPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b c α
 
@@ -160,7 +169,7 @@ The Miyamoto-Nagai potential.
 \$$(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])\$
 """
 @memoize function MiyamotoNagaiPotential(; name = :MiyamotoNagaiPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b
 
@@ -175,7 +184,7 @@ The NFW potential.
 \$$(LATEX_EXPRESSIONS["NFWPotential"])\$
 """
 @memoize function NFWPotential(; name = :NFWPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b c r
 
@@ -191,7 +200,7 @@ The Plummer potential.
 \$$(LATEX_EXPRESSIONS["PlummerPotential"])\$
 """
 @memoize function PlummerPotential(; name = :PlummerPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m b
 
@@ -208,7 +217,7 @@ The power-law cutoff potential.
 \$$(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])\$
 """
 @memoize function PowerLawCutoffPotential(; name = :PowerLawCutoffPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a α c
 
@@ -231,7 +240,7 @@ The Satoh potential.
 \$$(LATEX_EXPRESSIONS["SatohPotential"])\$
 """
 @memoize function SatohPotential(; name = :SatohPotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b
 
@@ -249,7 +258,7 @@ The StonePotential potential.
 \$$(LATEX_EXPRESSIONS["StonePotential"])\$
 """
 @memoize function StonePotential(; name = :StonePotential, kwargs...)
-    @variables t
+    @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m rᵪ rₕ
 

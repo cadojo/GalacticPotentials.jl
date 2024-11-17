@@ -5,10 +5,10 @@
 using GalacticPotentials, Test
 using ModelingToolkit, Symbolics
 
-using GalacticPotentials: AbstractField, AbstractScalarField, ScalarField
+using GalacticPotentials: ScalarField
 
-@testset verbose = true "Scalar Fields" begin
-    @variables t
+@testset verbose=true "Scalar Fields" begin
+    @independent_variables t
     p = @parameters b
     q = @variables x(t) y(t) z(t)
 
@@ -17,35 +17,30 @@ using GalacticPotentials: AbstractField, AbstractScalarField, ScalarField
         t,
         q,
         p;
-        name=:SomeField
+        name = :SomeField
     )
 
-    @testset showtiming = true "Constructors" begin
+    @testset showtiming=true "Constructors" begin
         @test field isa ModelingToolkit.AbstractSystem
     end
 
-    @testset showtiming = true "Calculations" begin
-        @test all(calculate_jacobian(field) - calculate_gradient(field) .== 0)
-        @test calculate_hessian(field) isa AbstractMatrix
+    @testset showtiming=true "Calculations" begin
+        @test calculate_jacobian(field) isa AbstractMatrix
     end
-
 end
 
-@testset verbose = true "Galactic Potentials" begin
+@testset verbose=true "Galactic Potentials" begin
     for name in names(GalacticPotentials)
         !occursin("Potential", "$name") && continue
         occursin("Potentials", "$name") && continue
 
         @eval field = $name()
 
-        @testset showtiming = true "$name" begin
+        @testset showtiming=true "$name" begin
             N = length(unknowns(field))
             M = length(parameters(field))
-            @test field isa AbstractField
-            @test calculate_gradient(complete(field; split=false)) isa AbstractVector
-            @test ODESystem(field) isa ODESystem
-            @test ODEProblem(complete(field; split=false), randn(2N), (rand(), rand()), randn(M)) isa ODEProblem
+            @test field isa ODESystem
+            @test calculate_jacobian(complete(field; split = false)) isa AbstractMatrix
         end
     end
-
 end
