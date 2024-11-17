@@ -12,27 +12,27 @@ The potential due to a harmonic oscillator.
         N::Integer = 1; name = :HarmonicOscillator, kwargs...)
     if N > 1
         @independent_variables t
-        @variables (x(t))[1:N]
+        @variables (τ(t))[1:N]
         @parameters ω[1:N]
 
-        x = collect(x)
+        τ = collect(τ)
         ω = collect(ω)
 
-        value = (1 // 2) * ω ⋅ ω * x ⋅ x
+        value = (1 // 2) * ω ⋅ ω * τ ⋅ τ
     elseif N == 1
         @independent_variables t
-        @variables x(t)
+        @variables τ(t)
         @parameters ω
 
-        value = (1 // 2) * ω^2 * x^2
+        value = (1 // 2) * ω^2 * τ^2
 
-        x = [x]
+        τ = [τ]
         ω = [ω]
     else
         error("Argument `$N` must be greater than zero!")
     end
 
-    return ScalarField(value, t, x, ω; name = name, kwargs...)
+    return ScalarField(value, t, τ, ω; name = name, kwargs...)
 end
 
 """
