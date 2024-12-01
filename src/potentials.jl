@@ -279,7 +279,8 @@ function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
 
     u = [x, y, z]
     du = [ẋ, ẏ, ż]
-    grad(sys) = Symbolics.gradient(sys.eqs[1].rhs, [x, y, z])
+
+    grad(sys) = Symbolics.gradient(sys.eqs[1].rhs, [x, y, z]) # TODO remove manual indexing
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
