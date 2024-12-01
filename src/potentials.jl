@@ -2,11 +2,22 @@ function ScalarField(value, t, u, p; name, simplify = true, kwargs...)
     @variables Φ(t)
 
     Δ = Differential(t)
-    Δ² = Δ^2
-    eqs = vcat(
-        Δ².(u) .~ -ModelingToolkit.gradient(value, u, simplify = simplify)
+
+    du = map(
+        x -> Symbol(:Δ, Symbol(first(split(string(x), "($(Symbolics.value(t)))")))),
+        u
     )
-    return ODESystem(vcat(eqs, Φ ~ value), t, vcat(u, Φ), p; name = name, kwargs...)
+
+    Δu = getfield.(
+        vcat((@variables($(δ)(t)) for δ in du)...),
+        :val
+    )
+
+    eqs = vcat(
+        Δ.(u) .~ Δu,
+        Δ.(Δu) .~ -ModelingToolkit.gradient(value, u, simplify = simplify)
+    )
+    return ODESystem(vcat(eqs, Φ ~ value), t, vcat(u, Δu, Φ), p; name = name, kwargs...)
 end
 
 """
@@ -14,7 +25,7 @@ The potential due to a harmonic oscillator.
 
 \$$(LATEX_EXPRESSIONS["HarmonicOscillatorPotential"])\$
 """
-@memoize function HarmonicOscillatorPotential(
+function HarmonicOscillatorPotential(
         N::Integer = 1; name = :HarmonicOscillator, kwargs...)
     if N > 1
         @independent_variables t
@@ -46,7 +57,7 @@ The Henon-Heiles potential.
 
 \$$(LATEX_EXPRESSIONS["HenonHeilesPotential"])\$
 """
-@memoize function HenonHeilesPotential(; name = :HenonHeilesPotential, kwargs...)
+function HenonHeilesPotential(; name = :HenonHeilesPotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t)
 
@@ -60,7 +71,7 @@ The Hernquist potential.
 
 \$$(LATEX_EXPRESSIONS["HernquistPotential"])\$
 """
-@memoize function HernquistPotential(; name = :HernquistPotential, kwargs...)
+function HernquistPotential(; name = :HernquistPotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters G m c
@@ -74,7 +85,7 @@ The Isochrone potential.
 
 \$$(LATEX_EXPRESSIONS["IsochronePotential"])\$
 """
-@memoize function IsochronePotential(; name = :IsochronePotential, kwargs...)
+function IsochronePotential(; name = :IsochronePotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters G m b
@@ -88,7 +99,7 @@ The Jaffe potential.
 
 \$$(LATEX_EXPRESSIONS["JaffePotential"])\$
 """
-@memoize function JaffePotential(; name = :JaffePotential, kwargs...)
+function JaffePotential(; name = :JaffePotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters G m c
@@ -105,7 +116,7 @@ The Kepler potential.
 
 \$$(LATEX_EXPRESSIONS["KeplerPotential"])\$
 """
-@memoize function KeplerPotential(; name = :KeplerPotential, kwargs...)
+function KeplerPotential(; name = :KeplerPotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters G m
@@ -119,7 +130,7 @@ The Kuzmin potential.
 
 \$$(LATEX_EXPRESSIONS["KuzminPotential"])\$
 """
-@memoize function KuzminPotential(; name = :KuzminPotential, kwargs...)
+function KuzminPotential(; name = :KuzminPotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters G m a
@@ -133,7 +144,7 @@ The logarithmic potential.
 
 \$$(LATEX_EXPRESSIONS["LogarithmicPotential"])\$
 """
-@memoize function LogarithmicPotential(; name = :LogarithmicPotential, kwargs...)
+function LogarithmicPotential(; name = :LogarithmicPotential, kwargs...)
     @independent_variables t
     @variables x(t) y(t) z(t)
     @parameters v r q[1:3]
@@ -150,7 +161,7 @@ The long Murali-bar potential.
 
 \$$(LATEX_EXPRESSIONS["LongMuraliBarPotential"])\$
 """
-@memoize function LongMuraliBarPotential(; name = :LongMuraliBarPotential, kwargs...)
+function LongMuraliBarPotential(; name = :LongMuraliBarPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b c α
@@ -174,7 +185,7 @@ The Miyamoto-Nagai potential.
 
 \$$(LATEX_EXPRESSIONS["MiyamotoNagaiPotential"])\$
 """
-@memoize function MiyamotoNagaiPotential(; name = :MiyamotoNagaiPotential, kwargs...)
+function MiyamotoNagaiPotential(; name = :MiyamotoNagaiPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b
@@ -189,7 +200,7 @@ The NFW potential.
 
 \$$(LATEX_EXPRESSIONS["NFWPotential"])\$
 """
-@memoize function NFWPotential(; name = :NFWPotential, kwargs...)
+function NFWPotential(; name = :NFWPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b c r
@@ -205,7 +216,7 @@ The Plummer potential.
 
 \$$(LATEX_EXPRESSIONS["PlummerPotential"])\$
 """
-@memoize function PlummerPotential(; name = :PlummerPotential, kwargs...)
+function PlummerPotential(; name = :PlummerPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m b
@@ -222,7 +233,7 @@ The power-law cutoff potential.
 
 \$$(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])\$
 """
-@memoize function PowerLawCutoffPotential(; name = :PowerLawCutoffPotential, kwargs...)
+function PowerLawCutoffPotential(; name = :PowerLawCutoffPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a α c
@@ -245,7 +256,7 @@ The Satoh potential.
 
 \$$(LATEX_EXPRESSIONS["SatohPotential"])\$
 """
-@memoize function SatohPotential(; name = :SatohPotential, kwargs...)
+function SatohPotential(; name = :SatohPotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m a b
@@ -263,7 +274,7 @@ The StonePotential potential.
 
 \$$(LATEX_EXPRESSIONS["StonePotential"])\$
 """
-@memoize function StonePotential(; name = :StonePotential, kwargs...)
+function StonePotential(; name = :StonePotential, kwargs...)
     @independent_variables t
     u = @variables x(t) y(t) z(t)
     p = @parameters G m rᵪ rₕ
@@ -289,56 +300,37 @@ using Memoize
 """
 A potential field for the Milky Way galaxy, based off of Dr. Bovy's 2015 paper.
 """
-@memoize function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
+function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
 
     # default_disk = dict(m=68193902782.346756 * u.Msun, a=3.0 * u.kpc, b=280 * u.pc)
     # default_bulge = dict(m=4501365375.06545 * u.Msun, alpha=1.8, r_c=1.9 * u.kpc)
     # default_halo = dict(m=4.3683325e11 * u.Msun, r_s=16 * u.kpc)
 
     @independent_variables t
-    @variables Φ(t) x(t) y(t) z(t)
-    disk = structural_simplify(MiyamotoNagaiPotential(; name = :Disk))
-    bulge = structural_simplify(PowerLawCutoffPotential(; name = :Bulge))
-    halo = structural_simplify(NFWPotential(; name = :Halo))
+    @variables Φ(t) x(t) y(t) z(t) Δx(t) Δy(t) Δz(t)
+    disk = MiyamotoNagaiPotential(; name = :Disk)
+    bulge = PowerLawCutoffPotential(; name = :Bulge)
+    halo = NFWPotential(; name = :Halo)
 
     Δ = Differential(t)
 
     aliases = [
-        disk.x => x,
-        disk.y => y,
-        disk.z => z,
-        disk.Δx => x,
-        disk.Δy => y,
-        disk.Δz => z,
-        bulge.x => x,
-        bulge.y => y,
-        bulge.z => z,
-        bulge.Δx => x,
-        bulge.Δy => y,
-        bulge.Δz => z,
-        halo.x => x,
-        halo.y => y,
-        halo.z => z,
-        halo.Δx => x,
-        halo.Δy => y,
-        halo.Δz => z
-    ]
+        x => disk.x,
+        y => disk.y,
+        z => disk.z]
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
-        Δ(x) ~ Δ(disk.Δx) + Δ(bulge.Δx) + Δ(halo.Δx),
-        Δ(y) ~ Δ(disk.Δy) + Δ(bulge.Δy) + Δ(halo.Δy),
-        Δ(z) ~ Δ(disk.Δz) + Δ(bulge.Δz) + Δ(halo.Δz),
+        Δ(Δx) ~ Δ(@namespace(disk.Δx)) + Δ(@namespace(bulge.Δx)) + Δ(@namespace(halo.Δx)),
+        Δ(Δy) ~ Δ(@namespace(disk.Δy)) + Δ(@namespace(bulge.Δy)) + Δ(@namespace(halo.Δy)),
+        Δ(Δz) ~ Δ(@namespace(disk.Δz)) + Δ(@namespace(bulge.Δz)) + Δ(@namespace(halo.Δz)),
         [alias.first ~ alias.second for alias in aliases]
     )
 
     return compose(
-        ODESystem(
-            eqs, t, [x, y, z, Δx, Δy, Δz, Φ],
-            vcat(
-                parameters(disk), parameters(bulge), parameters(halo));
-            name = :MilkyWay,
-            defaults = Dict(aliases)), disk, bulge, halo
+        ODESystem(eqs, t, [x, y, z, Δx, Δy, Δz, Φ],
+            vcat(parameters(disk), parameters(bulge), parameters(halo)); name = :MilkyWay),
+        disk, bulge, halo
     )
 end
 
