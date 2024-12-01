@@ -1,6 +1,12 @@
-function ScalarField(value, t, u, p; kwargs...)
+function ScalarField(value, t, u, p; name, simplify = true, kwargs...)
     @variables Φ(t)
-    return ODESystem([Φ ~ value], t, vcat(u, Φ), p; kwargs...)
+
+    Δ = Differential(t)
+    Δ² = Δ^2
+    eqs = vcat(
+        Δ².(u) .~ -ModelingToolkit.gradient(value, u, simplify = simplify)
+    )
+    return ODESystem(vcat(eqs, Φ ~ value), t, vcat(u, Φ), p; name = name, kwargs...)
 end
 
 """
@@ -289,26 +295,51 @@ A potential field for the Milky Way galaxy, based off of Dr. Bovy's 2015 paper.
     # default_bulge = dict(m=4501365375.06545 * u.Msun, alpha=1.8, r_c=1.9 * u.kpc)
     # default_halo = dict(m=4.3683325e11 * u.Msun, r_s=16 * u.kpc)
 
-    @variables t Φ(t) x(t) y(t) z(t)
-    disk = MiyamotoNagaiPotential(; name = :Disk)
-    bulge = PowerLawCutoffPotential(; name = :Bulge)
-    halo = NFWPotential(; name = :Halo)
+    @independent_variables t
+    @variables Φ(t) x(t) y(t) z(t)
+    disk = structural_simplify(MiyamotoNagaiPotential(; name = :Disk))
+    bulge = structural_simplify(PowerLawCutoffPotential(; name = :Bulge))
+    halo = structural_simplify(NFWPotential(; name = :Halo))
+
+    Δ = Differential(t)
+
+    aliases = [
+        disk.x => x,
+        disk.y => y,
+        disk.z => z,
+        disk.Δx => x,
+        disk.Δy => y,
+        disk.Δz => z,
+        bulge.x => x,
+        bulge.y => y,
+        bulge.z => z,
+        bulge.Δx => x,
+        bulge.Δy => y,
+        bulge.Δz => z,
+        halo.x => x,
+        halo.y => y,
+        halo.z => z,
+        halo.Δx => x,
+        halo.Δy => y,
+        halo.Δz => z
+    ]
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
-        disk.x ~ x,
-        disk.y ~ y,
-        disk.z ~ z,
-        bulge.x ~ x,
-        bulge.y ~ y,
-        bulge.z ~ z,
-        halo.x ~ x,
-        halo.y ~ y,
-        halo.z ~ z
+        Δ(x) ~ Δ(disk.Δx) + Δ(bulge.Δx) + Δ(halo.Δx),
+        Δ(y) ~ Δ(disk.Δy) + Δ(bulge.Δy) + Δ(halo.Δy),
+        Δ(z) ~ Δ(disk.Δz) + Δ(bulge.Δz) + Δ(halo.Δz),
+        [alias.first ~ alias.second for alias in aliases]
     )
 
     return compose(
-        ODESystem(eqs, t; name = :MilkyWay), disk, bulge, halo)
+        ODESystem(
+            eqs, t, [x, y, z, Δx, Δy, Δz, Φ],
+            vcat(
+                parameters(disk), parameters(bulge), parameters(halo));
+            name = :MilkyWay,
+            defaults = Dict(aliases)), disk, bulge, halo
+    )
 end
 
 end
