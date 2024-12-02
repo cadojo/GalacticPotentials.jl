@@ -257,13 +257,39 @@ A potential field for the Milky Way galaxy, based off of Dr. Bovy's 2015 paper.
 """
 function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
 
+    # gala 
     # default_disk = dict(m=68193902782.346756 * u.Msun, a=3.0 * u.kpc, b=280 * u.pc)
     # default_bulge = dict(m=4501365375.06545 * u.Msun, alpha=1.8, r_c=1.9 * u.kpc)
     # default_halo = dict(m=4.3683325e11 * u.Msun, r_s=16 * u.kpc)
 
+    # galpy
+    # bp= PowerSphericalPotentialwCutoff(alpha=1.8,rc=1.9/8.,normalize=0.05)
+    # mp= MiyamotoNagaiPotential(a=3./8.,b=0.28/8.,normalize=.6)
+    # np= NFWPotential(a=16/8.,normalize=.35)
+    # MWPotential2014= bp+mp+np
+
     disk = MiyamotoNagaiPotential(; name = :Disk)
     bulge = PowerLawCutoffPotential(; name = :Bulge)
     halo = NFWPotential(; name = :Halo)
+
+    G = 6.6743e-11
+
+    defaults = [
+        disk.a => 3,
+        disk.b => 280,
+        disk.G => G,
+        disk.m => 68193902782.346756,
+        bulge.c => 1.9,
+        bulge.m => 4501365375.06545,
+        bulge.α => 1.8,
+        bulge.G => G,
+        halo.a => 1.0,
+        halo.b => 1.0,
+        halo.c => 1.0,
+        halo.r => 16,
+        halo.m => 4.3683325e11,
+        halo.G => G
+    ]
 
     aliases = [
         disk.x => x,
@@ -280,7 +306,7 @@ function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
     u = [x, y, z]
     du = [ẋ, ẏ, ż]
 
-    grad(sys) = Symbolics.gradient(sys.eqs[1].rhs, [x, y, z]) # TODO remove manual indexing
+    grad(sys) = calculate_jacobian(sys; simplify = true)[(begin + 1):end] # TODO remove manual indexing
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
@@ -291,7 +317,8 @@ function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
 
     return compose(
         ODESystem(
-            eqs, t; name = name, defaults = Dict(aliases)),
+            eqs, t;
+            name = name, defaults = Dict(vcat(defaults, aliases))),
         disk, bulge, halo
     )
 end

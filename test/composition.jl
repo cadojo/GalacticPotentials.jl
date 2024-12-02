@@ -18,7 +18,7 @@ function PlummerPotential(; name = :PlummerPotential, kwargs...)
     return ScalarField(value, t, u, p; name = name, kwargs...)
 end
 
-function MilkyWay(; name = :MilkyWay, alias_equations = false, kwargs...)
+function MilkyWay(; name = :MilkyWay, kwargs...)
     @named disk = PlummerPotential()
     @named bulge = PlummerPotential()
     @named halo = PlummerPotential()
@@ -41,23 +41,21 @@ function MilkyWay(; name = :MilkyWay, alias_equations = false, kwargs...)
         halo.z => z
     ]
 
-    grad(sys) = ModelingToolkit.gradient(sys.Φ, [sys.x, sys.y, sys.z])
+    grad(sys) = calculate_jacobian(sys; simplify = true)[(begin + 1):end] # TODO remove manual indexing
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
         D.(u) .~ du,
-        D.(du) .~ -(grad(disk) .+ grad(bulge) .+ grad(halo))
+        D.(du) .~ -(grad(disk) .+ grad(bulge) .+ grad(halo)),
+        [alias.first ~ alias.second for alias in aliases]
     )
-
-    if alias_equations
-        append!(eqs, [alias.first ~ alias.second for alias in aliases])
-    end
 
     return compose(
         ODESystem(
-            eqs, t; name = :MilkyWay, defaults = Dict(aliases)),
+            eqs, t; name = name, defaults = Dict(aliases)),
         disk, bulge, halo
     )
 end
 
-mw = MilkyWay(alias_equations = true)
+mw = MilkyWay()
+mws = structural_simplify(mw)
