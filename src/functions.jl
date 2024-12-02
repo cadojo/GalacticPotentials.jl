@@ -7,7 +7,7 @@ Computes the lower incomplete gamma function.
 """
 function lowergamma(a, x)
     p, q = SpecialFunctions.gamma_inc(a, x)
-    return p * gamma(a)
+    return p * SpecialFunctions.gamma(a)
 end
 
 @register_symbolic lowergamma(x::AbstractFloat, y::AbstractFloat)

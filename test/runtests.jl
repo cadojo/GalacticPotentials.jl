@@ -44,3 +44,16 @@ end
         end
     end
 end
+
+@testset verbose=true "Milky Way Potentials" begin
+    mw = GalacticPotentials.MilkyWay.Bovy2014()
+    mws = structural_simplify(mw)
+
+    u = randn(6)
+    p = randn(21)
+    t = 0.0
+
+    f = ODEFunction(mws)
+
+    @test f(u, p, t) isa AbstractVector
+end
