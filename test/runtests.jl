@@ -50,10 +50,7 @@ end
     mws = structural_simplify(mw)
 
     u = randn(6)
-    p = randn(21)
-    t = 0.0
 
-    f = ODEFunction(mws)
-
-    @test f(u, p, t) isa AbstractVector
+    problem = ODEProblem(mws, u, (0.0, 10.0), [])
+    @test problem.f(u, problem.p, 0.0) isa AbstractVector
 end

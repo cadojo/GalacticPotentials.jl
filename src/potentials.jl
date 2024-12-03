@@ -1,8 +1,19 @@
-function ScalarField(value, t, u, p; name, simplify = true, kwargs...)
-    eqs::Vector{Equation} = vcat(
-        (Differential(t)^2).(u) .~ -ModelingToolkit.gradient(value, u, simplify = simplify)
-    )
-    return ODESystem(vcat(Φ ~ value), t; name = name, kwargs...)
+function ScalarField(value, t, u, p; name, gradient = true, simplify = true, kwargs...)
+    if gradient
+        symbols = [Symbol(:∂Φ∂, Symbol(first(split(string(x), "($(Symbolics.value(t)))"))))
+                   for x in u]
+
+        ∂Φ∂u = getfield.(
+            vcat((@variables($(x)(t)) for x in symbols)...),
+            :val
+        )
+
+        eqs = vcat(Φ ~ value, ∂Φ∂u .~ Symbolics.gradient(value, u, simplify = simplify))
+    else
+        eqs = [Φ ~ value]
+    end
+
+    return ODESystem(eqs, t; name = name, kwargs...)
 end
 
 """
@@ -306,7 +317,7 @@ function Bovy2014(; name = :BovyMilkyWayPotential, kwargs...)
     u = [x, y, z]
     du = [ẋ, ẏ, ż]
 
-    grad(sys) = calculate_jacobian(sys; simplify = true)[(begin + 1):end] # TODO remove manual indexing
+    grad(sys) = [sys.∂Φ∂x, sys.∂Φ∂y, sys.∂Φ∂z]
 
     eqs = vcat(
         Φ ~ disk.Φ + bulge.Φ + halo.Φ,
