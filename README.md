@@ -31,7 +31,7 @@ using ModelingToolkit
 using DifferentialEquations
 using GalacticPotentials
 
-let model = ODESystem(PlummerPotential())
+let model = PlummerPotential(gradient=true)
 
     p = @nonamespace Dict(
         model.G => 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
