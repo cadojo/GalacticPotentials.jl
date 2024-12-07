@@ -5,29 +5,7 @@
 using GalacticPotentials, Test
 using ModelingToolkit, Symbolics
 
-using GalacticPotentials: ScalarField
-
-@testset verbose=true "Scalar Fields" begin
-    @independent_variables t
-    p = @parameters b
-    q = @variables x(t) y(t) z(t)
-
-    field = ScalarField(
-        (b // 2) * sum(q .^ 2),
-        t,
-        q,
-        p;
-        name = :SomeField
-    )
-
-    @testset showtiming=true "Constructors" begin
-        @test field isa ModelingToolkit.AbstractSystem
-    end
-
-    @testset showtiming=true "Calculations" begin
-        @test calculate_jacobian(field) isa AbstractMatrix
-    end
-end
+using GalacticPotentials
 
 @testset verbose=true "Galactic Potentials" begin
     for name in names(GalacticPotentials)
@@ -52,5 +30,8 @@ end
     u = randn(6)
 
     problem = ODEProblem(mws, u, (0.0, 10.0), [])
-    @test problem.f(u, problem.p, 0.0) isa AbstractVector
+    du = problem.f(u, problem.p, 0.0)
+
+    @test du isa AbstractVector
+    @test du ≉ zeros(length(du))
 end
