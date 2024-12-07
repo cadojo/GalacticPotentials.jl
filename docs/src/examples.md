@@ -20,7 +20,7 @@ $y$, and $z$ to find the force (per unit mass) applied to the particle at all
 points in space.
 
 ```@repl example
-julia> system = PlummerPotential(gradient=true)
+system = PlummerPotential(gradient=true)
 ```
 
 The differential equations which define the `system` variable are shown below.
