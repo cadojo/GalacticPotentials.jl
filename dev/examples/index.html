@@ -1,77 +1,189 @@
 <!DOCTYPE html>
-<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Example Usage · GalacticPotentials</title><meta name="title" content="Example Usage · GalacticPotentials"/><meta property="og:title" content="Example Usage · GalacticPotentials"/><meta property="twitter:title" content="Example Usage · GalacticPotentials"/><meta name="description" content="Documentation for GalacticPotentials."/><meta property="og:description" content="Documentation for GalacticPotentials."/><meta property="twitter:description" content="Documentation for GalacticPotentials."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">GalacticPotentials</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><span class="tocitem">Overview</span><ul><li><a class="tocitem" href="../">Getting Started</a></li><li><a class="tocitem" href="../potentials/">Gravitational Potentials</a></li><li class="is-active"><a class="tocitem" href>Example Usage</a></li></ul></li><li><a class="tocitem" href="../reference/">Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Overview</a></li><li class="is-active"><a href>Example Usage</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Example Usage</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/cadojo/GalacticPotentials.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/cadojo/GalacticPotentials.jl/blob/main/docs/src/examples.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Example-Usage"><a class="docs-heading-anchor" href="#Example-Usage">Example Usage</a><a id="Example-Usage-1"></a><a class="docs-heading-anchor-permalink" href="#Example-Usage" title="Permalink"></a></h1><p>First, let&#39;s use everyone&#39;s favorite toy potential: the Plummer potential.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; using GalacticPotentials</code><code class="nohighlight hljs ansi" style="display:block;"></code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; field = PlummerPotential()</code><code class="nohighlight hljs ansi" style="display:block;"><span class="sgr1">Model PlummerPotential:</span>
-<span class="sgr1">Equations (1):</span>
-  1 standard: see equations(PlummerPotential)
-<span class="sgr1">Unknowns (4):</span> see unknowns(PlummerPotential)
-  V(t)
-  z(t)
-  x(t)
-  y(t)
-<span class="sgr1">Parameters (3):</span> see parameters(PlummerPotential)
-  G
-  b
-  m</code></pre><p>The Plummer potential field equation is shown below, where <span>$V \triangleq V(u,t)$</span>  is the scalar potential of the field at any point in space (and time).</p><p class="math-container">\[V = - \frac{G m}{\sqrt{b^{2} + x^{2} + y^{2} + z^{2}}}\]</p><p>Let&#39;s assume some massless particle which exists within this field. How will the particle move? As <a href="../potentials/">previously</a> described, we can take the gradient of the scalar field <span>$\Phi$</span> with respect to the state variables <span>$x$</span>, <span>$y$</span>, and <span>$z$</span> to find the force (per unit mass) applied to the particle at all points in space.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; system = PlummerPotential(gradient=true)</code><code class="nohighlight hljs ansi" style="display:block;"><span class="sgr1">Model PlummerPotential:</span>
-<span class="sgr1">Equations (10):</span>
-  10 standard: see equations(PlummerPotential)
-<span class="sgr1">Unknowns (10):</span> see unknowns(PlummerPotential)
-  x(t)
-  y(t)
-  z(t)
-  ẋ(t)
-  ⋮
-<span class="sgr1">Parameters (3):</span> see parameters(PlummerPotential)
-  G
-  b
-  m</code></pre><p>The differential equations which define the <code>system</code> variable are shown below. Note that the gradient of the scalar potential field has been integrated into a system of first-order differential equations: the expressions for the gradient are shown in the state equations for <span>$\frac{d \dot{x}}{d t}$</span>, <span>$\frac{d \dot{y}}{d t}$</span>, and <span>$\frac{d \dot{z}}{d t}$</span>.</p><p class="math-container">\[\begin{aligned}
+<html lang="en"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><title>Example Usage · GalacticPotentials</title><meta name="title" content="Example Usage · GalacticPotentials"/><meta property="og:title" content="Example Usage · GalacticPotentials"/><meta property="twitter:title" content="Example Usage · GalacticPotentials"/><meta name="description" content="Documentation for GalacticPotentials."/><meta property="og:description" content="Documentation for GalacticPotentials."/><meta property="twitter:description" content="Documentation for GalacticPotentials."/><script data-outdated-warner src="../assets/warner.js"></script><link href="https://cdnjs.cloudflare.com/ajax/libs/lato-font/3.0.0/css/lato-font.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/juliamono/0.050/juliamono.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/fontawesome.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/solid.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/brands.min.css" rel="stylesheet" type="text/css"/><link href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.8/katex.min.css" rel="stylesheet" type="text/css"/><script>documenterBaseURL=".."</script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" data-main="../assets/documenter.js"></script><script src="../search_index.js"></script><script src="../siteinfo.js"></script><script src="../../versions.js"></script><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-mocha.css" data-theme-name="catppuccin-mocha"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-macchiato.css" data-theme-name="catppuccin-macchiato"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-frappe.css" data-theme-name="catppuccin-frappe"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/catppuccin-latte.css" data-theme-name="catppuccin-latte"/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-dark.css" data-theme-name="documenter-dark" data-theme-primary-dark/><link class="docs-theme-link" rel="stylesheet" type="text/css" href="../assets/themes/documenter-light.css" data-theme-name="documenter-light" data-theme-primary/><script src="../assets/themeswap.js"></script></head><body><div id="documenter"><nav class="docs-sidebar"><div class="docs-package-name"><span class="docs-autofit"><a href="../">GalacticPotentials</a></span></div><button class="docs-search-query input is-rounded is-small is-clickable my-2 mx-auto py-1 px-2" id="documenter-search-query">Search docs (Ctrl + /)</button><ul class="docs-menu"><li><span class="tocitem">Overview</span><ul><li><a class="tocitem" href="../">Getting Started</a></li><li><a class="tocitem" href="../potentials/">Gravitational Potentials</a></li><li class="is-active"><a class="tocitem" href>Example Usage</a></li></ul></li><li><a class="tocitem" href="../reference/">Reference</a></li></ul><div class="docs-version-selector field has-addons"><div class="control"><span class="docs-label button is-static is-size-7">Version</span></div><div class="docs-selector control is-expanded"><div class="select is-fullwidth is-size-7"><select id="documenter-version-selector"></select></div></div></div></nav><div class="docs-main"><header class="docs-navbar"><a class="docs-sidebar-button docs-navbar-link fa-solid fa-bars is-hidden-desktop" id="documenter-sidebar-button" href="#"></a><nav class="breadcrumb"><ul class="is-hidden-mobile"><li><a class="is-disabled">Overview</a></li><li class="is-active"><a href>Example Usage</a></li></ul><ul class="is-hidden-tablet"><li class="is-active"><a href>Example Usage</a></li></ul></nav><div class="docs-right"><a class="docs-navbar-link" href="https://github.com/cadojo/GalacticPotentials.jl" title="View the repository on GitHub"><span class="docs-icon fa-brands"></span><span class="docs-label is-hidden-touch">GitHub</span></a><a class="docs-navbar-link" href="https://github.com/cadojo/GalacticPotentials.jl/blob/main/docs/src/examples.md" title="Edit source on GitHub"><span class="docs-icon fa-solid"></span></a><a class="docs-settings-button docs-navbar-link fa-solid fa-gear" id="documenter-settings-button" href="#" title="Settings"></a><a class="docs-article-toggle-button fa-solid fa-chevron-up" id="documenter-article-toggle-button" href="javascript:;" title="Collapse all docstrings"></a></div></header><article class="content" id="documenter-page"><h1 id="Example-Usage"><a class="docs-heading-anchor" href="#Example-Usage">Example Usage</a><a id="Example-Usage-1"></a><a class="docs-heading-anchor-permalink" href="#Example-Usage" title="Permalink"></a></h1><p>First, let&#39;s use everyone&#39;s favorite toy potential: the Plummer potential.</p><pre><code class="language-julia hljs">using GalacticPotentials
+
+field = PlummerPotential()</code></pre><p class="math-container">\[ \begin{align}
+V\left( t \right) &amp;= \frac{ - G m}{\sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}}}
+\end{align}
+ \]</p><p>The Plummer potential field equation is shown below, where <span>$V \triangleq V(u,p,t)$</span>  is the scalar potential of the field at any point in space (and time).</p><p class="math-container">\[V = - \frac{G m}{\sqrt{b^{2} + x^{2} + y^{2} + z^{2}}}\]</p><p>Let&#39;s assume some massless particle which exists within this field. How will the particle move? As <a href="../potentials/">previously</a> described, we can take the gradient of the scalar field <span>$\Phi$</span> with respect to the state variables <span>$x$</span>, <span>$y$</span>, and <span>$z$</span> to find the force (per unit mass) applied to the particle at all points in space.</p><pre><code class="language-julia hljs">system = PlummerPotential(gradient=true)</code></pre><p class="math-container">\[ \begin{align}
+\frac{\mathrm{d} x\left( t \right)}{\mathrm{d}t} &amp;= \dot{x}\left( t \right) \\
+\frac{\mathrm{d} y\left( t \right)}{\mathrm{d}t} &amp;= \dot{y}\left( t \right) \\
+\frac{\mathrm{d} z\left( t \right)}{\mathrm{d}t} &amp;= \dot{z}\left( t \right) \\
+\frac{\mathrm{d} \dot{x}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}x}\left( t \right) \\
+\frac{\mathrm{d} \dot{y}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}y}\left( t \right) \\
+\frac{\mathrm{d} \dot{z}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}z}\left( t \right) \\
+V\left( t \right) &amp;= \frac{ - G m}{\sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}}} \\
+\mathtt{{\partial}V{\partial}x}\left( t \right) &amp;= \frac{G m x\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} \\
+\mathtt{{\partial}V{\partial}y}\left( t \right) &amp;= \frac{G m y\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} \\
+\mathtt{{\partial}V{\partial}z}\left( t \right) &amp;= \frac{G m z\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}}
+\end{align}
+ \]</p><p>Note there are 10 equations! Most of these equations are observables, i.e.  they can be reconstructed lazily from the solution. We can reduce the system to 6 unknowns and 6 equations by calling <code>ModelingToolkit.structural_simplify</code>.</p><pre><code class="language-julia hljs">using ModelingToolkit
+system = structural_simplify(system)</code></pre><p class="math-container">\[ \begin{align}
+\frac{\mathrm{d} x\left( t \right)}{\mathrm{d}t} &amp;= \dot{x}\left( t \right) \\
+\frac{\mathrm{d} y\left( t \right)}{\mathrm{d}t} &amp;= \dot{y}\left( t \right) \\
+\frac{\mathrm{d} z\left( t \right)}{\mathrm{d}t} &amp;= \dot{z}\left( t \right) \\
+\frac{\mathrm{d} \dot{x}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}x}\left( t \right) \\
+\frac{\mathrm{d} \dot{y}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}y}\left( t \right) \\
+\frac{\mathrm{d} \dot{z}\left( t \right)}{\mathrm{d}t} &amp;=  - \mathtt{{\partial}V{\partial}z}\left( t \right)
+\end{align}
+ \]</p><p>The differential equations which define the <code>system</code> variable are shown below. Note that the gradient of the scalar potential field has been integrated into a system of first-order differential equations: the expressions for the gradient are shown in the state equations for <span>$\frac{d \dot{x}}{d t}$</span>, <span>$\frac{d \dot{y}}{d t}$</span>, and <span>$\frac{d \dot{z}}{d t}$</span>.</p><p class="math-container">\[\begin{aligned}
 \frac{\mathrm{d} x\left( t \right)}{\mathrm{d}t} =&amp; \textnormal{\.{x}}\left( t \right) \\
 \frac{\mathrm{d} y\left( t \right)}{\mathrm{d}t} =&amp; \textnormal{\.{y}}\left( t \right) \\
 \frac{\mathrm{d} z\left( t \right)}{\mathrm{d}t} =&amp; \textnormal{\.{z}}\left( t \right) \\
 \frac{\mathrm{d} \textnormal{\.{x}}\left( t \right)}{\mathrm{d}t} =&amp; \frac{ - G m x\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} \\
 \frac{\mathrm{d} \textnormal{\.{y}}\left( t \right)}{\mathrm{d}t} =&amp; \frac{ - G m y\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} \\
 \frac{\mathrm{d} \textnormal{\.{z}}\left( t \right)}{\mathrm{d}t} =&amp; \frac{ - G m z\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}}
-\end{aligned}\]</p><p>The <code>ModelingToolkit.jl</code> <code>AbstractSystem</code> interface methods are defined for all potential fields within <code>GalacticPotentials.jl</code> because they are all  <code>ModelingToolkit.ODESystem</code> instances!</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; using ModelingToolkit</code><code class="nohighlight hljs ansi" style="display:block;"></code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; G = calculate_gradient(system)</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: MethodError: no method matching calculate_gradient(::ODESystem)
-The function `calculate_gradient` exists, but no method is defined for this combination of argument types.
+\end{aligned}\]</p><p>The <code>ModelingToolkit.jl</code> <code>AbstractSystem</code> interface methods are defined for all potential fields within <code>GalacticPotentials.jl</code> because they are all  <code>ModelingToolkit.ODESystem</code> instances!</p><pre><code class="language-julia hljs">J = ModelingToolkit.calculate_jacobian(system)</code></pre><p class="math-container">\[ \begin{equation}
+\left[
+\begin{array}{cccccc}
+0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 0 &amp; 0 &amp; 1 \\
+\frac{ - G m}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} - 3 \frac{ - G m x\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} x\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp;  - 3 \frac{ - G m x\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} y\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp;  - 3 \frac{ - G m x\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} z\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp; 0 &amp; 0 &amp; 0 \\
+ - 3 \frac{ - G m y\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} x\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp; \frac{ - G m}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} - 3 \frac{ - G m y\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} y\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp;  - 3 \frac{ - G m y\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} z\left( t \right) \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp; 0 &amp; 0 &amp; 0 \\
+ - 3 x\left( t \right) \frac{ - G m z\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp;  - 3 y\left( t \right) \frac{ - G m z\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp; \frac{ - G m}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{3}} - 3 z\left( t \right) \frac{ - G m z\left( t \right)}{\left( \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} \right)^{6}} \sqrt{b^{2} + \left( x\left( t \right) \right)^{2} + \left( y\left( t \right) \right)^{2} + \left( z\left( t \right) \right)^{2}} &amp; 0 &amp; 0 &amp; 0 \\
+\end{array}
+\right]
+\end{equation}
+ \]</p><pre><code class="language-julia hljs">f = ModelingToolkit.generate_function(system)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">(:(function (ˍ₋arg1, ˍ₋arg2, t)
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:385 =#</span>
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:386 =#</span>
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:387 =#</span>
+      begin
+          begin
+              begin
+                  begin
+                      var&quot;∂V∂x(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;∂V∂y(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;∂V∂z(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;V(t)&quot; = (/)((*)((*)(-1, ˍ₋arg2[1]), ˍ₋arg2[3]), NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))))
+                      begin
+                          <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:480 =#</span>
+                          (SymbolicUtils.Code.create_array)(typeof(ˍ₋arg1), nothing, Val{1}(), Val{(6,)}(), ˍ₋arg1[4], ˍ₋arg1[5], ˍ₋arg1[6], (*)(-1, var&quot;∂V∂x(t)&quot;), (*)(-1, var&quot;∂V∂y(t)&quot;), (*)(-1, var&quot;∂V∂z(t)&quot;))
+                      end
+                  end
+              end
+          end
+      end
+  end), :(function (ˍ₋out, ˍ₋arg1, ˍ₋arg2, t)
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:385 =#</span>
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:386 =#</span>
+      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:387 =#</span>
+      begin
+          begin
+              begin
+                  begin
+                      var&quot;∂V∂x(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;∂V∂y(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;∂V∂z(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
+                      var&quot;V(t)&quot; = (/)((*)((*)(-1, ˍ₋arg2[1]), ˍ₋arg2[3]), NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))))
+                      begin
+                          <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/YbNrd/src/build_function.jl:546 =#</span>
+                          <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:434 =#</span> @inbounds begin
+                                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:430 =#</span>
+                                  ˍ₋out[1] = ˍ₋arg1[4]
+                                  ˍ₋out[2] = ˍ₋arg1[5]
+                                  ˍ₋out[3] = ˍ₋arg1[6]
+                                  ˍ₋out[4] = (*)(-1, var&quot;∂V∂x(t)&quot;)
+                                  ˍ₋out[5] = (*)(-1, var&quot;∂V∂y(t)&quot;)
+                                  ˍ₋out[6] = (*)(-1, var&quot;∂V∂z(t)&quot;)
+                                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/jf8aQ/src/code.jl:432 =#</span>
+                                  nothing
+                              end
+                      end
+                  end
+              end
+          end
+      end
+  end))</code></pre><p>As with any <code>ModelingToolkit.ODESystem</code>, we can construct a numerical problem by passing the system to an <code>ODEProblem</code> constructor.</p><pre><code class="language-julia hljs">using OrdinaryDiffEq
 
-Closest candidates are:
-  calculate_gradient(<span class="sgr91">::OptimizationSystem</span>)
-<span class="sgr90">   @</span> <span class="sgr35">ModelingToolkit</span> <span class="sgr90">~/.julia/packages/ModelingToolkit/Lm8W6/src/systems/optimization/<span class="sgr4">optimizationsystem.jl:191</span></span></code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; J = calculate_jacobian(system)</code><code class="nohighlight hljs ansi" style="display:block;">10×10 Matrix{Num}:
-                                                                                                                                                     0  …  1  0  0   0   0   0   0
-                                                                                                                                                     0     0  1  0   0   0   0   0
-                                                                                                                                                     0     0  0  1   0   0   0   0
-                                                                                                                                                     0     0  0  0   0  -1   0   0
-                                                                                                                                                     0     0  0  0   0   0  -1   0
-                                                                                                                                                     0  …  0  0  0   0   0   0  -1
-                                                    (-((-G*m) / (sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)^2))*x(t)) / sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)     0  0  0  -1   0   0   0
- (G*m) / (sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)^3) - 3x(t)*((G*m*x(t)) / (sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)^6))*sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)     0  0  0   0  -1   0   0
-                                                   -3x(t)*((G*m*y(t)) / (sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)^6))*sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)     0  0  0   0   0  -1   0
-                                                   -3((G*m*z(t)) / (sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)^6))*x(t)*sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)     0  0  0   0   0   0  -1</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; f = generate_function(system)</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: The LHS cannot contain nondifferentiated variables. Please run `structural_simplify` or use the DAE form.
-Got V(t) ~ (-G*m) / sqrt(b^2 + x(t)^2 + y(t)^2 + z(t)^2)</code></pre><p>Special constructors for <code>ODESystem</code> and <code>ODEProblem</code> – two <code>SciML</code> types – are defined for all potential fields within <code>GalacticPotentials.jl</code>. The <code>ODESystem</code> constructor was already illustrated above. Let&#39;s look at the <code>ODEProblem</code> constructor now.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; using OrdinaryDiffEq</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: ArgumentError: Package OrdinaryDiffEq not found in current path.
-- Run `import Pkg; Pkg.add(&quot;OrdinaryDiffEq&quot;)` to install the OrdinaryDiffEq package.</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; problem = let
-         p = randn(3)
-         u0 = randn(6)
-         ts = randn(2)
-       
-         ODEProblem(system, u0, ts, p)
-       end</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: A completed system is required. Call `complete` or `structural_simplify` on the system before creating an `ODEProblem`</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; problem = let model = system
-       
-         p = @nonamespace Dict(
-             model.G =&gt; 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
-             model.m =&gt; 6e31,       # mass (kg)
-             model.b =&gt; 1e-6        # softening parameter (unitless)
-         )
-       
-         u0 = @nonamespace Dict(
-             model.x =&gt; 11e5,
-             model.y =&gt; 5e5,
-             model.z =&gt; 0,
-             model.ẋ =&gt; 1e3,
-             model.ẏ =&gt; 1e3,
-             model.ż =&gt; 0
-         )
-       
-         ts = (0.0, 1e6)
-       
-         problem = ODEProblem(model, u0, ts, p)
-       end</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: A completed system is required. Call `complete` or `structural_simplify` on the system before creating an `ODEProblem`</code></pre><p>With the <code>ODEProblem</code> defined, you can use <code>OrdinaryDiffEq.jl</code> or <code>DifferentialEquations.jl</code> to numerically integrate the orbit, and <code>Plots.jl</code> to plot the result! For more information, consult the <code>SciML</code> <a href="https://docs.sciml.ai">documentation</a>, or the <code>GalacticPotentials.jl</code> <a href="../">Getting Started</a> page.</p><pre><code class="language-julia-repl hljs" style="display:block;">julia&gt; using Plots</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: ArgumentError: Package Plots not found in current path.
-- Run `import Pkg; Pkg.add(&quot;Plots&quot;)` to install the Plots package.</code><br/><code class="language-julia-repl hljs" style="display:block;">julia&gt; plot(solve(problem; abstol=1e-14, reltol=1e-14))</code><code class="nohighlight hljs ansi" style="display:block;">ERROR: UndefVarError: `plot` not defined in `Main`
-Suggestion: check for spelling errors or missing imports.</code></pre></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Sunday 8 December 2024 00:47">Sunday 8 December 2024</span>. Using Julia version 1.11.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+problem = let
+  p = randn(3)
+  u0 = randn(6)
+  ts = randn(2)
+
+  ODEProblem(system, u0, ts, p)
+end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"><span class="sgr38_2" style="color:#56b6c2">ODEProblem</span> with uType <span class="sgr38_2" style="color:#56b6c2">Vector{Float64}</span> and tType <span class="sgr38_2" style="color:#56b6c2">Float64</span>. In-place: <span class="sgr38_2" style="color:#56b6c2">true</span>
+timespan: (-0.2299627811350718, 0.3867005277552882)
+u0: 6-element Vector{Float64}:
+  0.49103854627261373
+ -0.1646687587571878
+ -0.32442712457398526
+ -0.03936015040026488
+  0.15882893848220456
+ -2.376360723283802</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia hljs">problem = let model = system
+
+  p = @nonamespace Dict(
+      model.G =&gt; 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
+      model.m =&gt; 6e31,       # mass (kg)
+      model.b =&gt; 1e-6        # softening parameter (unitless)
+  )
+
+  u0 = @nonamespace Dict(
+      model.x =&gt; 11e5,
+      model.y =&gt; 5e5,
+      model.z =&gt; 0,
+      model.ẋ =&gt; 1e3,
+      model.ẏ =&gt; 1e3,
+      model.ż =&gt; 0
+  )
+
+  ts = (0.0, 1e6)
+
+  ODEProblem(model, u0, ts, p)
+end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"><span class="sgr38_2" style="color:#56b6c2">ODEProblem</span> with uType <span class="sgr38_2" style="color:#56b6c2">Vector{Float64}</span> and tType <span class="sgr38_2" style="color:#56b6c2">Float64</span>. In-place: <span class="sgr38_2" style="color:#56b6c2">true</span>
+timespan: (0.0, 1.0e6)
+u0: 6-element Vector{Float64}:
+      1.1e6
+ 500000.0
+      0.0
+   1000.0
+   1000.0
+      0.0</code></pre><p>With the <code>ODEProblem</code> defined, you can use <code>OrdinaryDiffEq.jl</code> or <code>DifferentialEquations.jl</code> to numerically integrate the orbit.</p><pre><code class="language-julia hljs">trajectory = solve(problem; abstol=1e-14, reltol=1e-14)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">retcode: Success
+Interpolation: 3rd order Hermite
+t: 256291-element Vector{Float64}:
+      0.0
+      0.013197802131241424
+      0.05014304764849246
+      0.15021577485924098
+      0.3848075153592317
+      0.8682786303211043
+      1.739988326949991
+      3.212890521704138
+      5.631751364194772
+      9.197204880157667
+      ⋮
+ 999964.5207205131
+ 999969.5792016179
+ 999974.5293133778
+ 999979.372941097
+ 999984.1119519913
+ 999988.7488148169
+ 999993.2847787692
+ 999997.7225129462
+      1.0e6
+u: 256291-element Vector{Vector{Float64}}:
+ [1.1e6, 500000.0, 0.0, 1000.0, 1000.0, 0.0]
+ [1.1000131975846663e6, 500013.1977032831, 0.0, 999.9670454662253, 999.9850205586342, 0.0]
+ [1.1000501399086248e6, 500050.1416207936, 0.0, 999.8747997475791, 999.9430892379228, 0.0]
+ [1.1001501876059682e6, 500150.2029701186, 0.0, 999.6249766192773, 999.8295208618335, 0.0]
+ [1.1003846226970407e6, 500384.72349528124, 0.0, 999.039571022167, 999.5633497775608, 0.0]
+ [1.1008673380197324e6, 500867.85094515944, 0.0, 997.8341345747622, 999.0150498628665, 0.0]
+ [1.101736213605911e6, 501738.2714606479, 0.0, 995.6641944140613, 998.0273120566417, 0.0]
+ [1.1032000353121357e6, 503207.0404363633, 0.0, 992.0078623332342, 996.3608641322334, 0.0]
+ [1.10559232851275e6, 505613.79536319023, 0.0, 986.030728014931, 993.6309346629929, 0.0]
+ [1.1090923565496104e6, 509149.38838822267, 0.0, 977.2817125016892, 989.6221714283665, 0.0]
+ ⋮
+ [445227.8106922527, 676287.1081904409, 0.0, -1812.835627668459, -1406.0158625024062, 0.0]
+ [436014.35162411473, 669108.862525289, 0.0, -1829.9994161635495, -1432.220809808359, 0.0]
+ [426913.3686744799, 661954.1011534381, 0.0, -1847.1404986694185, -1458.66181336587, 0.0]
+ [417925.1939741604, 654824.6042506434, 0.0, -1864.2575744375713, -1485.341724674173, 0.0]
+ [409050.0955560058, 647722.0912945011, 0.0, -1881.3492574365662, -1512.2633687234882, 0.0]
+ [400287.10238425684, 640647.2677484945, 0.0, -1898.416380854634, -1539.4332312310921, 0.0]
+ [391637.44112144434, 633602.5940512748, 0.0, -1915.4553234949253, -1566.8508608334107, 0.0]
+ [383099.5391153258, 626588.2421167474, 0.0, -1932.4677737385043, -1594.5244588514238, 0.0]
+ [378688.28919301316, 622940.2158609731, 0.0, -1941.3349423060772, -1609.0690560226087, 0.0]</code></pre><p>Finally, you can use <code>Plots.jl</code> to show the result! For more information,  consult the <code>SciML</code> <a href="https://docs.sciml.ai">documentation</a>, or the  <code>GalacticPotentials.jl</code> <a href="../">Getting Started</a> page.</p><pre><code class="language-julia hljs">using Plots
+
+figure = plot(
+  trajectory, idxs=(:x, :y),
+  label=:none, title=&quot;Orbit in the Plummer Potential&quot;,
+)</code></pre><img src="a96df129.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Sunday 8 December 2024 16:58">Sunday 8 December 2024</span>. Using Julia version 1.11.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
