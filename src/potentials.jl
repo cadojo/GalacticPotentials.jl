@@ -431,9 +431,6 @@ end
 """
 The power-law cutoff potential.
 
-!!! warning
-    Not yet implemented!
-
 \$$(LATEX_EXPRESSIONS["PowerLawCutoffPotential"])\$
 """
 function PowerLawCutoffPotential(;
@@ -472,9 +469,6 @@ end
 """
 The Satoh potential.
 
-!!! warning
-    Not yet implemented!
-
 \$$(LATEX_EXPRESSIONS["SatohPotential"])\$
 """
 function SatohPotential(;
@@ -507,9 +501,6 @@ end
 
 """
 The StonePotential potential.
-
-!!! warning
-    Not yet implemented!
 
 \$$(LATEX_EXPRESSIONS["StonePotential"])\$
 """

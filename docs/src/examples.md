@@ -8,7 +8,7 @@ using GalacticPotentials
 field = PlummerPotential()
 ```
 
-The Plummer potential field equation is shown below, where $V \triangleq V(u,t)$ 
+The Plummer potential field equation is shown below, where $V \triangleq V(u,p,t)$ 
 is the scalar potential of the field at any point in space (and time).
 
 $$V = - \frac{G m}{\sqrt{b^{2} + x^{2} + y^{2} + z^{2}}}$$
@@ -21,6 +21,15 @@ points in space.
 
 ```@repl example
 system = PlummerPotential(gradient=true)
+```
+
+Note there are 10 equations! Most of these equations are observables, i.e. 
+they can be reconstructed lazily from the solution. We can reduce the system
+to 6 unknowns and 6 equations by calling `ModelingToolkit.structural_simplify`.
+
+```@repl example
+using ModelingToolkit
+system = structural_simplify(system)
 ```
 
 The differential equations which define the `system` variable are shown below.
@@ -43,19 +52,15 @@ all potential fields within `GalacticPotentials.jl` because they are all
 `ModelingToolkit.ODESystem` instances!
 
 ```@repl example
-using ModelingToolkit
-
-G = calculate_gradient(system)
-
-J = calculate_jacobian(system)
-
-f = generate_function(system)
+J = ModelingToolkit.calculate_jacobian(system)
 ```
 
-Special constructors for `ODESystem` and `ODEProblem` -- two `SciML` types --
-are defined for all potential fields within `GalacticPotentials.jl`. The
-`ODESystem` constructor was already illustrated above. Let's look at the
-`ODEProblem` constructor now.
+```@repl example
+f = ModelingToolkit.generate_function(system)
+```
+
+As with any `ModelingToolkit.ODESystem`, we can construct a numerical problem
+by passing the system to an `ODEProblem` constructor.
 
 ```@repl example
 using OrdinaryDiffEq
@@ -93,18 +98,30 @@ problem = let model = system
 
   ts = (0.0, 1e6)
 
-  problem = ODEProblem(model, u0, ts, p)
+  ODEProblem(model, u0, ts, p)
 end
 ```
 
 With the `ODEProblem` defined, you can use `OrdinaryDiffEq.jl` or
-`DifferentialEquations.jl` to numerically integrate the orbit, and `Plots.jl`
-to plot the result! For more information, consult the `SciML`
-[documentation](https://docs.sciml.ai), or the `GalacticPotentials.jl`
-[Getting Started](index.md) page.
+`DifferentialEquations.jl` to numerically integrate the orbit.
+
+```@repl example
+trajectory = solve(problem; abstol=1e-14, reltol=1e-14)
+```
+
+Finally, you can use `Plots.jl` to show the result! For more information, 
+consult the `SciML` [documentation](https://docs.sciml.ai), or the 
+`GalacticPotentials.jl` [Getting Started](index.md) page.
 
 ```@repl example
 using Plots
 
-plot(solve(problem; abstol=1e-14, reltol=1e-14))
+figure = plot(
+  trajectory, idxs=(:x, :y), 
+  label=:none, title="Orbit in the Plummer Potential", 
+)
+```
+
+```@example example
+figure # hide
 ```

@@ -47,9 +47,9 @@ let model = PlummerPotential(gradient=true)
         model.x => 11e5,
         model.y => 5e5,
         model.z => 0,
-        model.Δx => 1e3,
-        model.Δy => 1e3,
-        model.Δz => 0
+        model.ẋ => 1e3,
+        model.ẏ => 1e3,
+        model.ż => 0
     )
 
     ts = (0.0, 1e6)
