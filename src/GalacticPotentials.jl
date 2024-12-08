@@ -13,9 +13,7 @@ using DocStringExtensions
                                $(DOCSTRING)
                                """
 
-using Reexport
-@reexport using ModelingToolkit
-
+using ModelingToolkit
 using Symbolics
 using LaTeXStrings
 using LinearAlgebra
