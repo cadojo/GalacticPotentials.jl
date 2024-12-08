@@ -5,7 +5,7 @@
 # GalacticPotentials.jl. Thank you Gala!
 #
 
-if haskey(ENV, "CLEAN")
+if haskey(ENV, "CLEAN") || !isdir("venv")
     run(`rm -rf $(joinpath(@__DIR__, "venv"))`)
     run(`python3 -m venv $(joinpath(@__DIR__, "venv"))`)
 end
@@ -22,14 +22,15 @@ using PyCall, SymPy, LaTeXStrings
 
 gala = pyimport("gala.potential")
 
-expressions = Dict{String,LaTeXString}()
+expressions = Dict{String, LaTeXString}()
 
-latex!(collection::AbstractDict, name::AbstractString) =
+function latex!(collection::AbstractDict, name::AbstractString)
     try
         collection[name] = getproperty(gala.potential, name).to_latex()
     catch
         @warn "Unable to get expression for $name."
     end
+end
 
 for potential in gala.potential.__dir__()
     if occursin("Potential", potential)
@@ -54,7 +55,6 @@ open(joinpath(@__DIR__, "..", "src", "gen", "expressions.jl"), "w") do file
     end
 
     write(file, ")\n")
-
 end
 
 open(joinpath(@__DIR__, "..", "test", "gen", "potentials.jl"), "w") do file
@@ -75,5 +75,4 @@ open(joinpath(@__DIR__, "..", "test", "gen", "potentials.jl"), "w") do file
     end
 
     write(file, ")\n")
-
 end

@@ -2,7 +2,7 @@
 
 First, let's use everyone's favorite toy potential: the Plummer potential.
 
-```@repl example
+```@example example
 using GalacticPotentials
 
 field = PlummerPotential()
@@ -19,7 +19,7 @@ gradient of the scalar field $\Phi$ with respect to the state variables $x$,
 $y$, and $z$ to find the force (per unit mass) applied to the particle at all
 points in space.
 
-```@repl example
+```@example example
 system = PlummerPotential(gradient=true)
 ```
 
@@ -27,7 +27,7 @@ Note there are 10 equations! Most of these equations are observables, i.e.
 they can be reconstructed lazily from the solution. We can reduce the system
 to 6 unknowns and 6 equations by calling `ModelingToolkit.structural_simplify`.
 
-```@repl example
+```@example example
 using ModelingToolkit
 system = structural_simplify(system)
 ```
@@ -51,18 +51,18 @@ The `ModelingToolkit.jl` `AbstractSystem` interface methods are defined for
 all potential fields within `GalacticPotentials.jl` because they are all 
 `ModelingToolkit.ODESystem` instances!
 
-```@repl example
+```@example example
 J = ModelingToolkit.calculate_jacobian(system)
 ```
 
-```@repl example
+```@example example
 f = ModelingToolkit.generate_function(system)
 ```
 
 As with any `ModelingToolkit.ODESystem`, we can construct a numerical problem
 by passing the system to an `ODEProblem` constructor.
 
-```@repl example
+```@example example
 using OrdinaryDiffEq
 
 problem = let
@@ -78,7 +78,7 @@ It's generally safer to use _variable maps_ to provide initial conditions for
 your `ODEProblem`. Variable maps allow for an arbitrary state vector order; the
 `ODEProblem` call above assumes the parameter and state vector orders!
 
-```@repl example
+```@example example
 problem = let model = system
 
   p = @nonamespace Dict(
@@ -105,7 +105,7 @@ end
 With the `ODEProblem` defined, you can use `OrdinaryDiffEq.jl` or
 `DifferentialEquations.jl` to numerically integrate the orbit.
 
-```@repl example
+```@example example
 trajectory = solve(problem; abstol=1e-14, reltol=1e-14)
 ```
 
@@ -113,15 +113,11 @@ Finally, you can use `Plots.jl` to show the result! For more information,
 consult the `SciML` [documentation](https://docs.sciml.ai), or the 
 `GalacticPotentials.jl` [Getting Started](index.md) page.
 
-```@repl example
+```@example example
 using Plots
 
 figure = plot(
   trajectory, idxs=(:x, :y), 
   label=:none, title="Orbit in the Plummer Potential", 
 )
-```
-
-```@example example
-figure # hide
 ```
