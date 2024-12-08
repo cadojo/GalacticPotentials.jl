@@ -1,7 +1,7 @@
 name = "GalacticPotentials"
 uuid = "761e15e1-915f-4e6a-be22-a19e6141b375"
 authors = ["Joey Carpinelli <joey@loopy.codes>"]
-version = "0.2.1"
+version = "0.3.0"
 
 [deps]
 DocStringExtensions = "ffbed154-4ef7-542d-bbb7-c09d3a79fcae"
