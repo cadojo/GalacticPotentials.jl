@@ -103,14 +103,14 @@ problem = let
 
   ODEProblem(system, u0, ts, p)
 end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"><span class="sgr38_2" style="color:#56b6c2">ODEProblem</span> with uType <span class="sgr38_2" style="color:#56b6c2">Vector{Float64}</span> and tType <span class="sgr38_2" style="color:#56b6c2">Float64</span>. In-place: <span class="sgr38_2" style="color:#56b6c2">true</span>
-timespan: (-1.6942216469179916, 0.6222944974652109)
+timespan: (1.1443686388783012, 1.0275626572234184)
 u0: 6-element Vector{Float64}:
-  0.6200887246376705
-  1.4243401698895493
-  0.4287315691789479
- -0.8590920318941754
- -0.781949055654583
- -1.900167905453572</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia hljs">problem = let model = system
+  0.3285683580297652
+ -0.5733216993079496
+  0.9754616309776291
+  0.2786302498328605
+ -0.8669413758134713
+  0.7084086477231548</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia hljs">problem = let model = system
 
   p = @nonamespace Dict(
       model.G =&gt; 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
@@ -186,4 +186,4 @@ u: 256291-element Vector{Vector{Float64}}:
 figure = plot(
   trajectory, idxs=(:x, :y),
   label=:none, title=&quot;Orbit in the Plummer Potential&quot;,
-)</code></pre><img src="8aef2460.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Sunday 8 December 2024 17:20">Sunday 8 December 2024</span>. Using Julia version 1.11.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+)</code></pre><img src="8d8a3814.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Monday 9 December 2024 03:48">Monday 9 December 2024</span>. Using Julia version 1.11.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
