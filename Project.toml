@@ -22,6 +22,7 @@ ModelingToolkit = "9.3"
 Plots = "1.40.9"
 SpecialFunctions = "2"
 Symbolics = "5, 6"
+HypergeometricFunctions = "0.3"
 julia = "1.6"
 
 [extras]
