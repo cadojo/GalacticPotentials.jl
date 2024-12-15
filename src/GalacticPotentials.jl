@@ -1,5 +1,23 @@
 module GalacticPotentials
 
+export
+       ScalarField,
+       HarmonicOscillatorPotential,
+       HenonHeilesPotential,
+       HernquistPotential,
+       IsochronePotential,
+       JaffePotential,
+       KeplerPotential,
+       KuzminPotential,
+       LogarithmicPotential,
+       LongMuraliBarPotential,
+       MiyamotoNagaiPotential,
+       NFWPotential,
+       PlummerPotential,
+       PowerLawCutoffPotential,
+       SatohPotential,
+       StonePotential
+
 using DocStringExtensions
 @template (FUNCTIONS, METHODS, MACROS) = """
                                          $(SIGNATURES)
@@ -22,40 +40,16 @@ using Memoize
 import SpecialFunctions
 import HypergeometricFunctions
 
-module Symbols
+# module files
+include("symbols.jl")
 
-export t, D, V, x, y, z, ẋ, ẏ, ż, u, u̇
-
-import ModelingToolkit: @variables, t_nounits as t, D_nounits as D
-
-@variables V(t) [output = true]
-u = @variables x(t) [input = true] y(t) [input = true] z(t) [input = true]
-u̇ = @variables ẋ(t) [input = true] ẏ(t) [input = true] ż(t) [input = true]
-
-end
-
+# load modules
 using .Symbols
 
-export
-       ScalarField,
-       HarmonicOscillatorPotential,
-       HenonHeilesPotential,
-       HernquistPotential,
-       IsochronePotential,
-       JaffePotential,
-       KeplerPotential,
-       KuzminPotential,
-       LogarithmicPotential,
-       LongMuraliBarPotential,
-       MiyamotoNagaiPotential,
-       NFWPotential,
-       PlummerPotential,
-       PowerLawCutoffPotential,
-       SatohPotential,
-       StonePotential
-
+# non-module files
 include(joinpath(@__DIR__, "gen", "expressions.jl"))
 include("functions.jl")
-include("potentials.jl")
+include("primitives.jl")
+include("milkyway.jl")
 
 end # module GalacticPotentials

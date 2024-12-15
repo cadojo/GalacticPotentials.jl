@@ -24,7 +24,7 @@ using GalacticPotentials
 end
 
 @testset verbose=true "Milky Way Potentials" begin
-    mw = GalacticPotentials.MilkyWay.Bovy2014()
+    mw = GalacticPotentials.Bovy2014()
     mws = structural_simplify(mw)
 
     u = randn(6)
