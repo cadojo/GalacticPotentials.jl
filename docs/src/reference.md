@@ -4,7 +4,7 @@ _All docstrings!_
 ```@autodocs
 Modules = [
     GalacticPotentials,
-    GalacticPotentials.MilkyWay
+    GalacticPotentials.Symbols
 ]
 Order = [:module, :type, :function]
 ```
