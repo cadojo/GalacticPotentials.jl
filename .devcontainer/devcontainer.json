@@ -11,7 +11,7 @@
 		"ghcr.io/devcontainers/features/python:1": {
 			"installJupyterlab": true
 		},
-		"ghcr.io/devcontainers/features/github-cli": {},
+		"ghcr.io/devcontainers/features/git-lfs:1": {},
 		"ghcr.io/devcontainers-contrib/features/starship": {}
 	},
 	"postCreateCommand": {
