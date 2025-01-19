@@ -1,0 +1,4 @@
+[deps]
+GalacticPotentials = "761e15e1-915f-4e6a-be22-a19e6141b375"
+PythonCall = "6099a3de-0909-46bc-b1f4-468b9a2dfc0d"
+Revise = "295af30f-e4ad-537b-8983-00126c2a3abe"

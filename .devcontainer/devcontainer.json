@@ -16,5 +16,12 @@
 	},
 	"postCreateCommand": {
 		"Initialize Starship Prompt": "echo eval '$(starship init bash)' >> ~/.bashrc"
+	},
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-toolsai.jupyter"
+			]
+		}
 	}
 }
