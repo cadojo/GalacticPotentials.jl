@@ -44,62 +44,53 @@ system = structural_simplify(system)</code></pre><p class="math-container">\[ \b
 \end{array}
 \right]
 \end{equation}
- \]</p><pre><code class="language-julia hljs">f = ModelingToolkit.generate_function(system)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">(:(function (ˍ₋arg1, ˍ₋arg2, t)
-      <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/vs4TD/src/build_function.jl:340 =#</span> @inbounds begin
-              <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/vs4TD/src/build_function.jl:340 =#</span>
+ \]</p><pre><code class="language-julia hljs">f = ModelingToolkit.generate_function(system)</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi">(:(function (__mtk_arg_1, ___mtkparameters___, t)
+      <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/M5oEc/src/build_function.jl:366 =#</span> @inbounds begin
+              <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/M5oEc/src/build_function.jl:366 =#</span>
               begin
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:388 =#</span>
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:389 =#</span>
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:390 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:402 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:403 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:404 =#</span>
                   begin
+                      __mtk_arg_2 = ___mtkparameters___[1]
+                      __mtk_arg_3 = ___mtkparameters___[2]
                       begin
+                          var&quot;∂V∂x(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
+                          var&quot;∂V∂y(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
+                          var&quot;∂V∂z(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
                           begin
-                              begin
-                                  var&quot;∂V∂x(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;∂V∂y(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;∂V∂z(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;V(t)&quot; = (/)((*)((*)(-1, ˍ₋arg2[1]), ˍ₋arg2[3]), NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))))
-                                  begin
-                                      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:483 =#</span>
-                                      (SymbolicUtils.Code.create_array)(typeof(ˍ₋arg1), nothing, Val{1}(), Val{(6,)}(), ˍ₋arg1[4], ˍ₋arg1[5], ˍ₋arg1[6], (*)(-1, var&quot;∂V∂x(t)&quot;), (*)(-1, var&quot;∂V∂y(t)&quot;), (*)(-1, var&quot;∂V∂z(t)&quot;))
-                                  end
-                              end
+                              <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:503 =#</span>
+                              (SymbolicUtils.Code.create_array)(typeof(__mtk_arg_1), nothing, Val{1}(), Val{(6,)}(), __mtk_arg_1[4], __mtk_arg_1[5], __mtk_arg_1[6], (*)(-1, var&quot;∂V∂x(t)&quot;), (*)(-1, var&quot;∂V∂y(t)&quot;), (*)(-1, var&quot;∂V∂z(t)&quot;))
                           end
                       end
                   end
               end
           end
-  end), :(function (ˍ₋out, ˍ₋arg1, ˍ₋arg2, t)
-      <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/vs4TD/src/build_function.jl:342 =#</span> @inbounds begin
-              <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/vs4TD/src/build_function.jl:342 =#</span>
+  end), :(function (ˍ₋out, __mtk_arg_1, ___mtkparameters___, t)
+      <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/M5oEc/src/build_function.jl:368 =#</span> @inbounds begin
+              <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/M5oEc/src/build_function.jl:368 =#</span>
               begin
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:388 =#</span>
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:389 =#</span>
-                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:390 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:402 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:403 =#</span>
+                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:404 =#</span>
                   begin
+                      __mtk_arg_2 = ___mtkparameters___[1]
+                      __mtk_arg_3 = ___mtkparameters___[2]
                       begin
-                          begin
-                              begin
-                                  var&quot;∂V∂x(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;∂V∂y(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;∂V∂z(t)&quot; = (/)((*)((*)(ˍ₋arg2[1], ˍ₋arg2[3]), ˍ₋arg1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))), 3))
-                                  var&quot;V(t)&quot; = (/)((*)((*)(-1, ˍ₋arg2[1]), ˍ₋arg2[3]), NaNMath.sqrt((+)((+)((+)((^)(ˍ₋arg2[2], 2), (^)(ˍ₋arg1[1], 2)), (^)(ˍ₋arg1[2], 2)), (^)(ˍ₋arg1[3], 2))))
-                                  begin
-                                      <span class="sgr90">#= /home/runner/.julia/packages/Symbolics/vs4TD/src/build_function.jl:558 =#</span>
-                                      <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:437 =#</span> @inbounds begin
-                                              <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:433 =#</span>
-                                              ˍ₋out[1] = ˍ₋arg1[4]
-                                              ˍ₋out[2] = ˍ₋arg1[5]
-                                              ˍ₋out[3] = ˍ₋arg1[6]
-                                              ˍ₋out[4] = (*)(-1, var&quot;∂V∂x(t)&quot;)
-                                              ˍ₋out[5] = (*)(-1, var&quot;∂V∂y(t)&quot;)
-                                              ˍ₋out[6] = (*)(-1, var&quot;∂V∂z(t)&quot;)
-                                              <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/2cE5G/src/code.jl:435 =#</span>
-                                              nothing
-                                          end
-                                  end
+                          var&quot;∂V∂x(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[1]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
+                          var&quot;∂V∂y(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[2]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
+                          var&quot;∂V∂z(t)&quot; = (/)((*)((*)(__mtk_arg_2[1], __mtk_arg_2[3]), __mtk_arg_1[3]), (^)(NaNMath.sqrt((+)((+)((+)((^)(__mtk_arg_2[2], 2), (^)(__mtk_arg_1[1], 2)), (^)(__mtk_arg_1[2], 2)), (^)(__mtk_arg_1[3], 2))), 3))
+                          <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:457 =#</span> @inbounds begin
+                                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:453 =#</span>
+                                  ˍ₋out[1] = __mtk_arg_1[4]
+                                  ˍ₋out[2] = __mtk_arg_1[5]
+                                  ˍ₋out[3] = __mtk_arg_1[6]
+                                  ˍ₋out[4] = (*)(-1, var&quot;∂V∂x(t)&quot;)
+                                  ˍ₋out[5] = (*)(-1, var&quot;∂V∂y(t)&quot;)
+                                  ˍ₋out[6] = (*)(-1, var&quot;∂V∂z(t)&quot;)
+                                  <span class="sgr90">#= /home/runner/.julia/packages/SymbolicUtils/KHJCP/src/code.jl:455 =#</span>
+                                  ˍ₋out
                               end
-                          end
                       end
                   end
               end
@@ -113,14 +104,16 @@ problem = let
 
   ODEProblem(system, u0, ts, p)
 end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"><span class="sgr38_2" style="color:#56b6c2">ODEProblem</span> with uType <span class="sgr38_2" style="color:#56b6c2">Vector{Float64}</span> and tType <span class="sgr38_2" style="color:#56b6c2">Float64</span>. In-place: <span class="sgr38_2" style="color:#56b6c2">true</span>
-timespan: (1.675870767862405, 0.9553824898739499)
+Initialization status: <span class="sgr38_2" style="color:#56b6c2">FULLY_DETERMINED</span>
+Non-trivial mass matrix: <span class="sgr38_2" style="color:#56b6c2">false</span>
+timespan: (0.1353975361175755, -1.2109064553712772)
 u0: 6-element Vector{Float64}:
- -2.6490959406211667
-  1.328333087039783
-  2.1291263269313694
-  0.7721539566834483
- -0.8304419831583706
-  1.1664155912111092</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia hljs">problem = let model = system
+  0.43247798140719695
+ -1.265691005518647
+ -1.290232939112287
+ -1.478567647284481
+ -0.519228703424815
+  0.2266823354136924</code></pre><p>It&#39;s generally safer to use <em>variable maps</em> to provide initial conditions for your <code>ODEProblem</code>. Variable maps allow for an arbitrary state vector order; the <code>ODEProblem</code> call above assumes the parameter and state vector orders!</p><pre><code class="language-julia hljs">problem = let model = system
 
   p = @nonamespace Dict(
       model.G =&gt; 6.6743e-20, # field strength (km³ kg⁻¹ s⁻²)
@@ -141,6 +134,8 @@ u0: 6-element Vector{Float64}:
 
   ODEProblem(model, u0, ts, p)
 end</code></pre><pre class="documenter-example-output"><code class="nohighlight hljs ansi"><span class="sgr38_2" style="color:#56b6c2">ODEProblem</span> with uType <span class="sgr38_2" style="color:#56b6c2">Vector{Float64}</span> and tType <span class="sgr38_2" style="color:#56b6c2">Float64</span>. In-place: <span class="sgr38_2" style="color:#56b6c2">true</span>
+Initialization status: <span class="sgr38_2" style="color:#56b6c2">FULLY_DETERMINED</span>
+Non-trivial mass matrix: <span class="sgr38_2" style="color:#56b6c2">false</span>
 timespan: (0.0, 1.0e6)
 u0: 6-element Vector{Float64}:
       1.1e6
@@ -196,4 +191,4 @@ u: 256291-element Vector{Vector{Float64}}:
 figure = plot(
   trajectory, idxs=(:x, :y),
   label=:none, title=&quot;Orbit in the Plummer Potential&quot;,
-)</code></pre><img src="9da4e43b.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.8.0 on <span class="colophon-date" title="Sunday 19 January 2025 18:35">Sunday 19 January 2025</span>. Using Julia version 1.11.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+)</code></pre><img src="7b2044d6.svg" alt="Example block output"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../potentials/">« Gravitational Potentials</a><a class="docs-footer-nextpage" href="../reference/">Reference »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="auto">Automatic (OS)</option><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option><option value="catppuccin-latte">catppuccin-latte</option><option value="catppuccin-frappe">catppuccin-frappe</option><option value="catppuccin-macchiato">catppuccin-macchiato</option><option value="catppuccin-mocha">catppuccin-mocha</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 1.9.0 on <span class="colophon-date" title="Sunday 30 March 2025 19:02">Sunday 30 March 2025</span>. Using Julia version 1.11.4.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
